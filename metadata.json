@@ -1,0 +1,6 @@
+{
+  "name": "Webspect AI & Dev",
+  "description": "Webspect designs and builds the digital tools businesses need to get noticed, serve customers and run more efficiently.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
