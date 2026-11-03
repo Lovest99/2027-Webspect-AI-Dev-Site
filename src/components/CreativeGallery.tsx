@@ -68,13 +68,13 @@ export const CreativeGallery: React.FC = () => {
         </div>
 
         {/* Category Filters (Functional Buttons) */}
-        <div className="mt-6 flex flex-wrap items-center gap-1.5">
+        <div className="mt-6 flex items-center gap-1.5 overflow-x-auto pb-1.5 sm:pb-0 sm:flex-wrap [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           {categories.map((cat) => (
             <button
               key={cat}
               type="button"
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
+              className={`px-3 py-1 rounded-lg text-xs font-medium whitespace-nowrap shrink-0 transition-all cursor-pointer ${
                 selectedCategory === cat
                   ? 'bg-slate-900 text-white shadow-xs'
                   : 'bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200'

@@ -4,7 +4,7 @@ import path from 'path';
 import fs from 'fs';
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 const isProd = process.env.NODE_ENV === 'production';
 
 app.use(express.json());
@@ -83,7 +83,7 @@ app.get('/api/health', (_req: Request, res: Response) => {
     status: 'ok',
     brand: 'Webspect AI & Dev',
     founder: 'Bright Cheteni',
-    location: 'Bulawayo, Zimbabwe',
+    location: 'Zimbabwe',
     whatsapp: '+263 78 767 9376',
     time: new Date().toISOString(),
   });

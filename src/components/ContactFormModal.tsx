@@ -249,6 +249,8 @@ ${initialPackage ? `- Selected Package: ${initialPackage}` : ''}`;
                 </label>
                 <input
                   type="text"
+                  name="name"
+                  autoComplete="name"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -263,6 +265,8 @@ ${initialPackage ? `- Selected Package: ${initialPackage}` : ''}`;
                 </label>
                 <input
                   type="text"
+                  name="organization"
+                  autoComplete="organization"
                   value={businessName}
                   onChange={(e) => setBusinessName(e.target.value)}
                   placeholder="e.g. Apex Civil Solutions"
@@ -310,6 +314,8 @@ ${initialPackage ? `- Selected Package: ${initialPackage}` : ''}`;
                 </label>
                 <input
                   type={contactMethod === 'whatsapp' ? 'tel' : 'email'}
+                  name={contactMethod === 'whatsapp' ? 'phone' : 'email'}
+                  autoComplete={contactMethod === 'whatsapp' ? 'tel' : 'email'}
                   required
                   value={contactValue}
                   onChange={(e) => setContactValue(e.target.value)}
