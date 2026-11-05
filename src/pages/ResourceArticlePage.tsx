@@ -22,8 +22,17 @@ export const ResourceArticlePage: React.FC<ResourceArticlePageProps> = ({ slug, 
   const article = RESOURCE_ARTICLES.find((a) => a.slug === slug) || RESOURCE_ARTICLES[0];
 
   return (
-    <main className="py-14 sm:py-20 bg-[#FAFAF8] min-h-screen">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main className="py-14 sm:py-20 bg-[#FAFAF8] min-h-screen relative overflow-hidden">
+      {/* Engineered Canvas Micro-Dot Grid */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
+
+      {/* Atmospheric Pale Blue Radial Light Bloom */}
+      <div
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[850px] h-[360px] bg-gradient-to-b from-[#1442CB]/[0.07] via-[#1E40AF]/[0.02] to-transparent blur-3xl"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs text-slate-500 mb-8">
           <a
@@ -42,11 +51,14 @@ export const ResourceArticlePage: React.FC<ResourceArticlePageProps> = ({ slug, 
 
         {/* Article Header */}
         <header className="space-y-4 pb-8 border-b border-slate-200">
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#1442CB] block">
-            {article.category}
-          </span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50/90 border border-blue-200/70 text-xs font-semibold text-[#1442CB] uppercase tracking-wider mb-1 shadow-2xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#1442CB]" />
+            <span>{article.category}</span>
+          </div>
           <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            {article.title}
+            <span className="bg-gradient-to-r from-slate-900 via-[#1442CB] to-indigo-950 bg-clip-text text-transparent">
+              {article.title}
+            </span>
           </h1>
           <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
             {article.subtitle}

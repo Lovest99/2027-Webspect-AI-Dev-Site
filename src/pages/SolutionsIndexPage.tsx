@@ -34,15 +34,25 @@ export const SolutionsIndexPage: React.FC<SolutionsIndexPageProps> = ({ onOpenCo
   };
 
   return (
-    <main className="py-16 sm:py-24 bg-[#FAFAF8] min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main className="py-16 sm:py-24 bg-[#FAFAF8] min-h-screen relative overflow-hidden">
+      {/* Engineered Canvas Micro-Dot Grid */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
+
+      {/* Atmospheric Pale Blue Radial Light Bloom */}
+      <div
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[380px] bg-gradient-to-b from-[#1442CB]/[0.07] via-[#1E40AF]/[0.02] to-transparent blur-3xl"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="max-w-3xl">
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#1442CB] block mb-2">
-            Organised by Business Outcomes
-          </span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50/90 border border-blue-200/70 text-xs font-semibold text-[#1442CB] uppercase tracking-wider mb-3 shadow-2xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#1442CB]" />
+            <span>Organised by Business Outcomes</span>
+          </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            Digital tools shaped around what you want to achieve.
+            Digital tools shaped around <span className="bg-gradient-to-r from-[#1442CB] via-blue-600 to-indigo-600 bg-clip-text text-transparent">what you want to achieve</span>.
           </h1>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
             Rather than selling disconnected technical services, Webspect provides practical business
@@ -57,7 +67,7 @@ export const SolutionsIndexPage: React.FC<SolutionsIndexPageProps> = ({ onOpenCo
                 const el = document.getElementById('solution-finder');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-4 py-2.5 bg-white text-slate-800 border border-slate-300 rounded-xl text-xs font-semibold hover:bg-slate-50 transition-colors inline-flex items-center gap-2 shadow-2xs"
+              className="px-5 py-3 bg-white text-slate-800 border border-slate-300 rounded-xl text-xs sm:text-sm font-semibold hover:bg-slate-50 transition-colors inline-flex items-center gap-2.5 shadow-2xs cursor-pointer"
             >
               <Compass className="w-4 h-4 text-[#1442CB]" />
               <span>Not sure where to start? Use the 3-step Solution Finder</span>

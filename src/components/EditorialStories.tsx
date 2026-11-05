@@ -49,7 +49,7 @@ export const EditorialStories: React.FC = () => {
               Deep-Dive Solutions
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
-              How Webspect solves real business challenges.
+              How Webspect solves <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-300 bg-clip-text text-transparent">real business challenges</span>.
             </h2>
             <p className="mt-1.5 text-xs sm:text-sm text-slate-300 max-w-xl leading-relaxed">
               Explore how we design customer-facing websites, human-supervised automation, and
@@ -172,7 +172,7 @@ export const EditorialStories: React.FC = () => {
             </div>
 
             {/* Right Visual: Journey Architecture */}
-            <div className="lg:col-span-6 bg-[#080E21] rounded-xl border border-slate-800 p-4 sm:p-6 space-y-3">
+            <div className="lg:col-span-6 bg-[#080E21] rounded-xl border border-slate-800 p-4 sm:p-6 space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-slate-800">
                 <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
                   Customer Journey Architecture
@@ -180,6 +180,21 @@ export const EditorialStories: React.FC = () => {
                 <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-800/60">
                   Discovery → Enquiry
                 </span>
+              </div>
+
+              {/* Real Delivered Client Conversion Poster */}
+              <div className="rounded-lg overflow-hidden border border-slate-800 bg-slate-950 relative group aspect-[16/9] flex items-center justify-center">
+                <img
+                  src="/assets/aistudio/file_0000000034ec8211943d2fd9091f992f_33a58136.png"
+                  alt="Multivate Construction commercial campaign poster"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                <div className="absolute bottom-2 left-2.5 right-2.5 flex items-center justify-between text-[10px] font-mono text-white/90">
+                  <span>Client: Multivate Construction</span>
+                  <span className="text-amber-400 font-bold">Verified Conversion Asset</span>
+                </div>
               </div>
 
               <div className="space-y-2.5">
@@ -297,7 +312,7 @@ export const EditorialStories: React.FC = () => {
             </div>
 
             {/* Right Visual: Interactive Review Pipeline */}
-            <div className="lg:col-span-6 bg-[#080E21] text-white rounded-xl p-4 sm:p-5 border border-slate-800 space-y-2.5">
+            <div className="lg:col-span-6 bg-[#080E21] text-white rounded-xl p-4 sm:p-5 border border-slate-800 space-y-3">
               <div className="flex items-center justify-between pb-2.5 border-b border-slate-800">
                 <span className="text-[11px] font-mono text-slate-400">
                   PIPELINE SIMULATOR
@@ -305,6 +320,21 @@ export const EditorialStories: React.FC = () => {
                 <span className="text-[11px] font-mono text-amber-400">
                   Human-in-the-Loop Active
                 </span>
+              </div>
+
+              {/* Real Relay AI Platform Screenshot Preview */}
+              <div className="rounded-lg overflow-hidden border border-slate-800 bg-slate-950 relative group aspect-[16/9] flex items-center justify-center">
+                <img
+                  src="/assets/aistudio/relay-03-dashboard_3d786d9a.jpg"
+                  alt="Relay AI automation engine dashboard"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                <div className="absolute bottom-2 left-2.5 right-2.5 flex items-center justify-between text-[10px] font-mono text-white/90">
+                  <span>Engine: Relay AI Router</span>
+                  <span className="text-emerald-400 font-bold">Live Production Dashboard</span>
+                </div>
               </div>
 
               <div className="space-y-2">
@@ -463,6 +493,21 @@ export const EditorialStories: React.FC = () => {
                 >
                   mist.co.zw <ExternalLink className="w-3 h-3" />
                 </a>
+              </div>
+
+              {/* Real MIST Civic Platform Screenshot Preview */}
+              <div className="rounded-lg overflow-hidden border border-slate-800 bg-slate-950 relative group aspect-[16/9] flex items-center justify-center">
+                <img
+                  src="/assets/aistudio/mist-01-hero-archived_202dda1a.jpg"
+                  alt="MIST Civic Platform live portal"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                <div className="absolute bottom-2 left-2.5 right-2.5 flex items-center justify-between text-[10px] font-mono text-white/90">
+                  <span>MIST Platform Portal</span>
+                  <span className="text-blue-400 font-bold">Civic Infrastructure System</span>
+                </div>
               </div>
 
               <div className="p-3 bg-slate-900/90 rounded-lg border border-slate-800 space-y-1.5">

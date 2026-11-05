@@ -198,15 +198,25 @@ export const SolutionFinder: React.FC<SolutionFinderProps> = ({ onSendProjectEnq
   };
 
   return (
-    <section id="solution-finder" className="py-12 sm:py-16 bg-white border-b border-slate-200/80">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="solution-finder" className="py-12 sm:py-16 bg-white/80 backdrop-blur-xs relative overflow-hidden border-b border-slate-200/80">
+      {/* Engineered Canvas Micro-Dot Grid */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
+
+      {/* Atmospheric Light Bloom */}
+      <div
+        className="pointer-events-none absolute -top-24 left-1/3 w-[500px] h-[300px] bg-gradient-to-b from-[#1442CB]/[0.05] to-transparent blur-3xl"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto">
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#1442CB] block mb-1.5">
-            Interactive Navigator
-          </span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50/90 border border-blue-200/70 text-xs font-semibold text-[#1442CB] uppercase tracking-wider mb-2.5 shadow-2xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#1442CB]" />
+            <span>Interactive Navigator</span>
+          </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
-            Find the right solution for your business.
+            Find the <span className="bg-gradient-to-r from-[#1442CB] via-blue-600 to-indigo-600 bg-clip-text text-transparent">right solution for your business</span>.
           </h2>
           <p className="mt-2 text-xs sm:text-sm text-slate-600">
             Answer 3 quick questions. Our transparent rule-based finder recommends the most effective

@@ -48,8 +48,17 @@ export const SolutionDetailPage: React.FC<SolutionDetailPageProps> = ({ slug, on
   const Icon = getIcon(solution.iconName);
 
   return (
-    <main className="py-14 sm:py-20 bg-[#FAFAF8] min-h-screen">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main className="py-14 sm:py-20 bg-[#FAFAF8] min-h-screen relative overflow-hidden">
+      {/* Engineered Canvas Micro-Dot Grid */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
+
+      {/* Atmospheric Pale Blue Radial Light Bloom */}
+      <div
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[850px] h-[360px] bg-gradient-to-b from-[#1442CB]/[0.07] via-[#1E40AF]/[0.02] to-transparent blur-3xl"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs text-slate-500 mb-6">
           <a
@@ -68,13 +77,15 @@ export const SolutionDetailPage: React.FC<SolutionDetailPageProps> = ({ slug, on
 
         {/* 1. Outcome-led Headline & Plain-language definition */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 border border-blue-200 text-[#1442CB] rounded-lg text-xs font-semibold mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-blue-50 border border-blue-200 text-[#1442CB] rounded-xl text-xs font-semibold mb-4 shadow-2xs">
             <Icon className="w-4 h-4" />
             <span>Goal: {solution.navTitle}</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            {solution.pageTitle}
+            <span className="bg-gradient-to-r from-slate-900 via-[#1442CB] to-indigo-950 bg-clip-text text-transparent">
+              {solution.pageTitle}
+            </span>
           </h1>
 
           <p className="mt-5 text-base sm:text-lg text-slate-600 leading-relaxed">
@@ -84,7 +95,7 @@ export const SolutionDetailPage: React.FC<SolutionDetailPageProps> = ({ slug, on
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <button
               onClick={() => onOpenContact(solution.pageTitle)}
-              className="px-6 py-3 text-xs sm:text-sm font-semibold text-white bg-[#1442CB] hover:bg-[#0F35A8] rounded-xl shadow-xs transition-colors inline-flex items-center gap-2"
+              className="px-6 py-3.5 text-xs sm:text-sm font-semibold text-white bg-[#1442CB] hover:bg-[#0F35A8] rounded-xl shadow-xs transition-colors inline-flex items-center gap-2 cursor-pointer"
             >
               <span>{solution.ctaLabel}</span>
               <ArrowRight className="w-4 h-4" />
@@ -93,7 +104,7 @@ export const SolutionDetailPage: React.FC<SolutionDetailPageProps> = ({ slug, on
               href="https://wa.me/263787679376"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 py-3 text-xs sm:text-sm font-semibold text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 rounded-xl transition-colors"
+              className="px-5 py-3.5 text-xs sm:text-sm font-semibold text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 rounded-xl transition-colors cursor-pointer"
             >
               Chat on WhatsApp
             </a>
@@ -195,20 +206,38 @@ export const SolutionDetailPage: React.FC<SolutionDetailPageProps> = ({ slug, on
                 <div
                   key={w.id}
                   onClick={() => navigate(`/work/${w.slug}`)}
-                  className="bg-white rounded-2xl border border-slate-200 p-6 hover:border-slate-300 transition-all cursor-pointer shadow-2xs"
+                  className="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:border-slate-300 transition-all cursor-pointer shadow-2xs flex flex-col justify-between group"
                 >
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-mono text-amber-600 uppercase font-semibold">
-                      {w.projectType}
-                    </span>
-                    <span className="text-slate-400">{w.sector}</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-900 mt-2">{w.title}</h3>
-                  <p className="text-xs text-slate-600 mt-2 line-clamp-2">{w.summary}</p>
-                  <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
-                    <span className="text-xs font-semibold text-[#1442CB] flex items-center gap-1">
-                      Read full case study <ArrowRight className="w-3.5 h-3.5" />
-                    </span>
+                  {w.imagePath && (
+                    <div className="w-full aspect-[16/9] overflow-hidden border-b border-slate-100 bg-slate-950 relative">
+                      <img
+                        src={w.imagePath}
+                        alt={w.title}
+                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                      <span className="absolute bottom-2 left-2.5 text-[9px] font-mono uppercase bg-black/60 text-white/90 px-1.5 py-0.5 rounded backdrop-blur-xs">
+                        Verified Case Study
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="p-6">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="font-mono text-amber-600 uppercase font-semibold">
+                        {w.projectType}
+                      </span>
+                      <span className="text-slate-400">{w.sector}</span>
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-900 mt-2 group-hover:text-[#1442CB] transition-colors">
+                      {w.title}
+                    </h3>
+                    <p className="text-xs text-slate-600 mt-2 line-clamp-2">{w.summary}</p>
+                    <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
+                      <span className="text-xs font-semibold text-[#1442CB] flex items-center gap-1">
+                        View case study <ArrowRight className="w-3.5 h-3.5" />
+                      </span>
+                    </div>
                   </div>
                 </div>
               ))}

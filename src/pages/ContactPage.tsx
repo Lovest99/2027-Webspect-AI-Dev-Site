@@ -96,16 +96,26 @@ export const ContactPage: React.FC = () => {
   )}`;
 
   return (
-    <main className="py-16 sm:py-24 bg-[#FAFAF8] min-h-screen">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main className="py-16 sm:py-24 bg-[#FAFAF8] min-h-screen relative overflow-hidden">
+      {/* Engineered Canvas Micro-Dot Grid */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
+
+      {/* Atmospheric Pale Blue Radial Light Bloom */}
+      <div
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[380px] bg-gradient-to-b from-[#1442CB]/[0.07] via-[#1E40AF]/[0.02] to-transparent blur-3xl"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left Column: Direct info & WhatsApp */}
           <div className="lg:col-span-5 space-y-6">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#1442CB] block">
-              Contact & Scoping
-            </span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50/90 border border-blue-200/70 text-xs font-semibold text-[#1442CB] uppercase tracking-wider mb-2.5 shadow-2xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#1442CB]" />
+              <span>Contact & Scoping</span>
+            </div>
             <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
-              Let’s talk about your project.
+              Let’s talk about <span className="bg-gradient-to-r from-[#1442CB] via-blue-600 to-indigo-600 bg-clip-text text-transparent">your project</span>.
             </h1>
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
               Whether you need a high-performance business website, an enquiry automation pipeline, a
@@ -154,7 +164,7 @@ export const ContactPage: React.FC = () => {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold shadow-xs transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs sm:text-sm font-semibold shadow-xs transition-colors"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span>Chat on {COMPANY_INFO.contact.whatsappNumber}</span>
@@ -204,7 +214,7 @@ export const ContactPage: React.FC = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-xs font-semibold text-slate-700 block mb-1">
+                    <label className="text-xs font-semibold text-slate-700 block mb-1.5">
                       Your Name <span className="text-rose-500">*</span>
                     </label>
                     <input
@@ -215,12 +225,12 @@ export const ContactPage: React.FC = () => {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="e.g. Tendai Moyo"
-                      className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1442CB]"
+                      className="w-full px-4 py-3 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1442CB]/25 focus:border-[#1442CB] transition-all placeholder:text-slate-400 shadow-2xs"
                     />
                   </div>
 
                   <div>
-                    <label className="text-xs font-semibold text-slate-700 block mb-1">
+                    <label className="text-xs font-semibold text-slate-700 block mb-1.5">
                       Business Name
                     </label>
                     <input
@@ -230,24 +240,24 @@ export const ContactPage: React.FC = () => {
                       value={businessName}
                       onChange={(e) => setBusinessName(e.target.value)}
                       placeholder="e.g. Apex Civil Solutions"
-                      className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1442CB]"
+                      className="w-full px-4 py-3 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1442CB]/25 focus:border-[#1442CB] transition-all placeholder:text-slate-400 shadow-2xs"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-xs font-semibold text-slate-700 block mb-1">
+                    <label className="text-xs font-semibold text-slate-700 block mb-1.5">
                       Preferred Channel
                     </label>
                     <div className="flex items-center gap-2">
                       <button
                         type="button"
                         onClick={() => setContactMethod('whatsapp')}
-                        className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-medium border text-center transition-all ${
+                        className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-semibold border text-center transition-all cursor-pointer ${
                           contactMethod === 'whatsapp'
-                            ? 'bg-blue-50 border-[#1442CB] text-[#1442CB] font-semibold'
-                            : 'bg-white border-slate-200 text-slate-600'
+                            ? 'bg-blue-50 border-[#1442CB] text-[#1442CB] shadow-2xs'
+                            : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
                         }`}
                       >
                         WhatsApp
@@ -255,10 +265,10 @@ export const ContactPage: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => setContactMethod('email')}
-                        className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-medium border text-center transition-all ${
+                        className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-semibold border text-center transition-all cursor-pointer ${
                           contactMethod === 'email'
-                            ? 'bg-blue-50 border-[#1442CB] text-[#1442CB] font-semibold'
-                            : 'bg-white border-slate-200 text-slate-600'
+                            ? 'bg-blue-50 border-[#1442CB] text-[#1442CB] shadow-2xs'
+                            : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
                         }`}
                       >
                         Email
@@ -267,7 +277,7 @@ export const ContactPage: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="text-xs font-semibold text-slate-700 block mb-1">
+                    <label className="text-xs font-semibold text-slate-700 block mb-1.5">
                       {contactMethod === 'whatsapp' ? 'WhatsApp Number' : 'Email Address'}{' '}
                       <span className="text-rose-500">*</span>
                     </label>
@@ -281,19 +291,19 @@ export const ContactPage: React.FC = () => {
                       placeholder={
                         contactMethod === 'whatsapp' ? '+263 78 ...' : 'name@company.com'
                       }
-                      className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1442CB]"
+                      className="w-full px-4 py-3 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1442CB]/25 focus:border-[#1442CB] transition-all placeholder:text-slate-400 shadow-2xs"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">
+                  <label className="text-xs font-semibold text-slate-700 block mb-1.5">
                     What area are you looking to improve?
                   </label>
                   <select
                     value={interest}
                     onChange={(e) => setInterest(e.target.value)}
-                    className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1442CB]"
+                    className="w-full px-4 py-3 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1442CB]/25 focus:border-[#1442CB] transition-all text-slate-900 shadow-2xs"
                   >
                     {interestOptions.map((opt) => (
                       <option key={opt} value={opt}>
@@ -304,7 +314,7 @@ export const ContactPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">
+                  <label className="text-xs font-semibold text-slate-700 block mb-1.5">
                     What are you looking to build or solve? <span className="text-rose-500">*</span>
                   </label>
                   <textarea
@@ -313,13 +323,13 @@ export const ContactPage: React.FC = () => {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Tell us what you're working on, what's getting in the way, or what you'd like to build..."
-                    className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1442CB]"
+                    className="w-full px-4 py-3 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1442CB]/25 focus:border-[#1442CB] transition-all placeholder:text-slate-400 shadow-2xs"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-xs font-semibold text-slate-700 block mb-1">
+                    <label className="text-xs font-semibold text-slate-700 block mb-1.5">
                       Estimated Budget (Optional)
                     </label>
                     <input
@@ -327,12 +337,12 @@ export const ContactPage: React.FC = () => {
                       value={budget}
                       onChange={(e) => setBudget(e.target.value)}
                       placeholder="e.g. Under $100, $200–$500, Custom"
-                      className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1442CB]"
+                      className="w-full px-4 py-3 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1442CB]/25 focus:border-[#1442CB] transition-all placeholder:text-slate-400 shadow-2xs"
                     />
                   </div>
 
                   <div>
-                    <label className="text-xs font-semibold text-slate-700 block mb-1">
+                    <label className="text-xs font-semibold text-slate-700 block mb-1.5">
                       Desired Timeline (Optional)
                     </label>
                     <input
@@ -340,7 +350,7 @@ export const ContactPage: React.FC = () => {
                       value={timeline}
                       onChange={(e) => setTimeline(e.target.value)}
                       placeholder="e.g. Next 2 weeks, Flexible"
-                      className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1442CB]"
+                      className="w-full px-4 py-3 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1442CB]/25 focus:border-[#1442CB] transition-all placeholder:text-slate-400 shadow-2xs"
                     />
                   </div>
                 </div>
@@ -349,7 +359,7 @@ export const ContactPage: React.FC = () => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full py-3 px-6 text-sm font-semibold text-white bg-[#1442CB] hover:bg-[#0F35A8] rounded-xl shadow-xs transition-colors flex items-center justify-center gap-2"
+                    className="w-full py-3.5 px-6 text-xs sm:text-sm font-semibold text-white bg-[#1442CB] hover:bg-[#0F35A8] rounded-xl shadow-xs transition-colors flex items-center justify-center gap-2 cursor-pointer"
                   >
                     {loading ? (
                       <>

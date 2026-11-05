@@ -34,7 +34,7 @@ export const FinalConversation: React.FC<FinalConversationProps> = ({ onOpenCont
           Start a Conversation
         </span>
         <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
-          What would you like to make better?
+          What would you like to <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-300 bg-clip-text text-transparent">make better</span>?
         </h2>
         <p className="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
           Tell us what you’re working on, what’s getting in the way or what you’d like to build.

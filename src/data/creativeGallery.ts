@@ -4,6 +4,8 @@ export interface CreativeDesign {
   category: 'Construction & Industrial' | 'Corporate Services' | 'Beauty & Retail' | 'Healthcare & Consulting';
   headline: string;
   briefSummary: string;
+  imagePath?: string;
+  galleryImages?: string[];
   brandColors: {
     primary: string;
     secondary: string;
@@ -20,16 +22,18 @@ export const CREATIVE_DESIGNS: CreativeDesign[] = [
     id: 'multivate',
     client: 'Multivate Construction',
     category: 'Construction & Industrial',
-    headline: 'Building Infrastructure With Engineering Discipline',
-    briefSummary: 'A high-impact promotional campaign establishing Multivate as the premier heavy civil, earthmoving and building contractor across Matabeleland and Zimbabwe.',
+    headline: 'Your home called. It wants a refresh.',
+    briefSummary: 'A high-impact promotional campaign establishing Multivate as the premier renovation, plastering and painting specialist across Bulawayo and Zimbabwe.',
+    imagePath: '/assets/aistudio/file_0000000034ec8211943d2fd9091f992f_33a58136.png',
+    galleryImages: ['/assets/aistudio/file_0000000034ec8211943d2fd9091f992f_33a58136.png'],
     brandColors: {
       primary: '#0F172A',
-      secondary: '#D97706',
-      accent: '#F59E0B',
-      surface: '#FEF3C7'
+      secondary: '#DC2626',
+      accent: '#2563EB',
+      surface: '#FEF2F2'
     },
-    typographyStyle: 'Bold industrial geometric sans with high-contrast amber warnings',
-    deliverables: ['Plant & Machinery Equipment Poster', 'Tender Capability Showcase', 'Site Safety Notice Graphics'],
+    typographyStyle: 'Bold industrial headline with vibrant WhatsApp REFRESH call-to-action',
+    deliverables: ['Home Refresh Campaign Poster', 'Renovations & Painting Flyer', 'WhatsApp Intake Artwork'],
     dimensions: '1080 x 1350 (Portrait Feed) & 1080 x 1920 (Status)'
   },
   {
@@ -84,32 +88,57 @@ export const CREATIVE_DESIGNS: CreativeDesign[] = [
     id: 'general-aluminium',
     client: 'General Aluminium Solutions',
     category: 'Construction & Industrial',
-    headline: 'Precision Architectural Aluminium & Glazing Systems',
-    briefSummary: 'Architectural showcase highlighting sliding folding doors, curtain wall facades, and modern residential aluminium window systems.',
+    headline: 'Frame Your Space. Aluminium doors, windows & glass solutions',
+    briefSummary: 'Architectural showcase highlighting sliding doors, windows, shopfronts, verandah enclosures, shower cubicles, and office partitions in Southerton, Harare.',
+    imagePath: '/assets/aistudio/file_0000000012fc821199272b82bcbe0dc1_ec2eb850.png',
+    galleryImages: ['/assets/aistudio/file_0000000012fc821199272b82bcbe0dc1_ec2eb850.png'],
     brandColors: {
-      primary: '#111827',
-      secondary: '#374151',
-      accent: '#0284C7',
-      surface: '#F3F4F6'
+      primary: '#0B2545',
+      secondary: '#DC2626',
+      accent: '#38BDF8',
+      surface: '#F0F9FF'
     },
-    typographyStyle: 'Architectural drafting-inspired typography with crisp technical precision',
-    deliverables: ['Modern Pivot Door Spotlight', 'Residential Glazing Renovation Flyer', 'Commercial Shopfront Spec Sheet'],
+    typographyStyle: 'Architectural drafting-inspired typography with bold red accent action bar',
+    deliverables: ['Frame Your Space Master Campaign', 'Sliding Doors & Windows Spec Flyer', 'Direct Quote Request Artwork'],
     dimensions: '1080 x 1350 (Portrait) & 1080 x 1920 (Status)'
   },
   {
     id: 'dr-shana',
-    client: 'Dr Shana Medical Consulting',
+    client: 'Dr Shana Herbs & Food Supplements',
     category: 'Healthcare & Consulting',
-    headline: 'Empathetic Clinical Healthcare & Patient Wellness',
-    briefSummary: 'Dignified, trustworthy clinical communication outlining consulting hours, wellness checkups, and specialized clinical care.',
+    headline: 'Herbs & Supplements. Delivered to You.',
+    briefSummary: 'Commercial food supplement product launch poster with Bulawayo delivery routing, featuring Revicell, Yeegarlic, Ganoderma, and Ginseng.',
+    imagePath: '/assets/aistudio/file_00000000103c821188fc16c750cdb539_40815e79.png',
+    galleryImages: [
+      '/assets/aistudio/file_00000000103c821188fc16c750cdb539_40815e79.png',
+      '/assets/aistudio/file_0000000005088211b5bd4bc964906c62_4ee6230b.png'
+    ],
     brandColors: {
-      primary: '#1E1B4B',
-      secondary: '#312E81',
-      accent: '#6366F1',
-      surface: '#EEF2FF'
+      primary: '#064E3B',
+      secondary: '#15803D',
+      accent: '#D97706',
+      surface: '#FEF3C7'
     },
-    typographyStyle: 'Authoritative, calm typography evoking medical excellence and care',
-    deliverables: ['Clinic Consultation Hours Notice', 'Annual Health Screening Guide', 'Patient Appointment Protocol'],
-    dimensions: '1080 x 1080 (Square) & 1080 x 1920 (Status)'
+    typographyStyle: 'Premium botanical serif with golden header flourishes and high-clarity ordering badges',
+    deliverables: ['Full Product Range Showcase', 'Bulawayo Delivery Callout Flyer', 'WhatsApp Product List Order Poster'],
+    dimensions: '1080 x 1350 (Portrait) & 1080 x 1920 (Status)'
+  },
+  {
+    id: 'dr-shana-guarana',
+    client: 'Dr Shana Herbs & Food Supplements',
+    category: 'Healthcare & Consulting',
+    headline: 'Liquid Chlorophyll Plus Guarana – Your Next Product Enquiry, Simplified.',
+    briefSummary: 'High-conversion single-product showcase engineered for WhatsApp status and social channels with ordering support and ingredient guides.',
+    imagePath: '/assets/aistudio/file_0000000005088211b5bd4bc964906c62_4ee6230b.png',
+    galleryImages: ['/assets/aistudio/file_0000000005088211b5bd4bc964906c62_4ee6230b.png'],
+    brandColors: {
+      primary: '#064E3B',
+      secondary: '#047857',
+      accent: '#10B981',
+      surface: '#ECFDF5'
+    },
+    typographyStyle: 'Refined herbal luxury layout with ingredients checklist and WhatsApp order triggers',
+    deliverables: ['Liquid Chlorophyll Spotlight Poster', 'Ingredient & Direction Checklist', 'WhatsApp Direct Order Route'],
+    dimensions: '1080 x 1350 (Portrait) & 1080 x 1920 (Status)'
   }
 ];

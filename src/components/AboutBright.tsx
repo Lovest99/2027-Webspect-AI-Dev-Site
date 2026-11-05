@@ -15,13 +15,38 @@ export const AboutBright: React.FC = () => {
   const { founder } = COMPANY_INFO;
 
   return (
-    <section className="py-12 sm:py-16 bg-white border-b border-slate-200/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-14 sm:py-20 bg-white/90 border-b border-slate-200/80 relative overflow-hidden">
+      {/* Engineered Canvas Micro-Dot Grid */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
+
+      {/* Atmospheric Pale Blue Radial Light Bloom */}
+      <div
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[340px] bg-gradient-to-b from-[#1442CB]/[0.06] via-[#1E40AF]/[0.02] to-transparent blur-3xl"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Authentic Profile Card */}
-          <div className="lg:col-span-5 bg-[#FAFAF8] rounded-xl border border-slate-200/90 p-5 sm:p-6 shadow-xs">
-            {/* Visual Header */}
-            <div className="flex items-center gap-4 pb-6 border-b border-slate-200/80">
+          <div className="lg:col-span-5 bg-[#FAFAF8] rounded-2xl border border-slate-200/90 shadow-xs overflow-hidden">
+            {/* Real Founder Engineering Portfolio Banner (16:9 Widescreen Flush to Rounded Corners) */}
+            <div className="w-full overflow-hidden border-b border-slate-200/90 bg-slate-950 aspect-[16/9] relative group">
+              <img
+                src={founder.portfolioImage || '/assets/aistudio/bright-portfolio-01-hero.jpg'}
+                alt="Bright Cheteni software engineering portfolio banner"
+                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-[10px] font-mono text-white/90">
+                <span className="bg-black/60 px-2 py-0.5 rounded backdrop-blur-xs">brightcheteni.dev</span>
+                <span className="text-emerald-400 font-semibold bg-black/60 px-2 py-0.5 rounded backdrop-blur-xs">Verified Portfolio</span>
+              </div>
+            </div>
+
+            <div className="p-5 sm:p-6">
+              {/* Visual Header */}
+              <div className="flex items-center gap-4 pb-6 border-b border-slate-200/80">
               <div className="w-16 h-16 rounded-2xl bg-[#0A1128] text-white flex items-center justify-center font-bold text-2xl shadow-sm shrink-0">
                 BC
               </div>
@@ -71,14 +96,16 @@ export const AboutBright: React.FC = () => {
               </ul>
             </div>
           </div>
+        </div>
 
           {/* Right Column: Editorial Bio & Philosophy */}
           <div className="lg:col-span-7 space-y-6">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#1442CB] block">
-              Engineering Leadership
-            </span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50/90 border border-blue-200/70 text-xs font-semibold text-[#1442CB] uppercase tracking-wider shadow-2xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#1442CB]" />
+              <span>Engineering Leadership</span>
+            </div>
             <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
-              Direct engineering with no middle layers.
+              Direct engineering with <span className="bg-gradient-to-r from-[#1442CB] via-blue-600 to-indigo-600 bg-clip-text text-transparent">no middle layers</span>.
             </h2>
             <p className="text-base text-slate-600 leading-relaxed">
               {founder.bio}
@@ -111,7 +138,7 @@ export const AboutBright: React.FC = () => {
               <button
                 type="button"
                 onClick={() => navigate('/company')}
-                className="px-5 py-2.5 text-xs sm:text-sm font-semibold text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors inline-flex items-center gap-2"
+                className="px-6 py-3.5 text-xs sm:text-sm font-semibold text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors inline-flex items-center gap-2 cursor-pointer shadow-2xs"
               >
                 <span>Read more about Webspect</span>
                 <ArrowRight className="w-4 h-4" />

@@ -9,6 +9,9 @@ import {
   CheckCircle2,
   AlertCircle,
   HelpCircle,
+  Maximize2,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 import { PRODUCTS, Product } from '../data/products';
 import { useRouter } from '../context/RouterContext';
@@ -21,6 +24,8 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onRegisterInterest }
   const { navigate } = useRouter();
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [activeStatus, setActiveStatus] = useState<string>('All');
+  const [previewProduct, setPreviewProduct] = useState<Product | null>(null);
+  const [activeImgIndex, setActiveImgIndex] = useState<number>(0);
 
   const categories = ['All', 'Enterprise & Automation', 'Productivity & AI', 'Civic & Utilities', 'Industry & IoT'];
   const statuses = ['All', 'Live Public Application', 'Interactive Prototype', 'In Development', 'Civic / Client Platform'];
@@ -31,16 +36,46 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onRegisterInterest }
     return matchCat && matchStatus;
   });
 
+  React.useEffect(() => {
+    if (previewProduct) {
+      const originalOverflow = document.body.style.overflow;
+      const originalTouchAction = document.body.style.touchAction;
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setPreviewProduct(null);
+      };
+      window.addEventListener('keydown', handleKeyDown);
+
+      return () => {
+        document.body.style.overflow = originalOverflow;
+        document.body.style.touchAction = originalTouchAction;
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    }
+  }, [previewProduct]);
+
   return (
-    <main className="py-16 sm:py-24 bg-[#FAFAF8] min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main className="py-16 sm:py-24 bg-[#FAFAF8] min-h-screen relative overflow-hidden">
+      {/* Engineered Canvas Micro-Dot Grid */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
+
+      {/* Atmospheric Pale Blue Radial Light Bloom */}
+      <div
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[380px] bg-gradient-to-b from-[#1442CB]/[0.07] via-[#1E40AF]/[0.02] to-transparent blur-3xl"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="max-w-3xl">
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#1442CB] block mb-2">
-            Independent Software & Prototypes
-          </span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50/90 border border-blue-200/70 text-xs font-semibold text-[#1442CB] uppercase tracking-wider mb-3 shadow-2xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#1442CB]" />
+            <span>Independent Software & Prototypes</span>
+          </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            Products with purpose.
+            Products with <span className="bg-gradient-to-r from-[#1442CB] via-blue-600 to-indigo-600 bg-clip-text text-transparent">purpose</span>.
           </h1>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
             A curated index of software tools, civic utilities, and operational prototypes built by
@@ -49,10 +84,10 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onRegisterInterest }
           </p>
         </div>
 
-        {/* Filters */}
-        <div className="mt-10 space-y-3">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider mr-2">
+        {/* Filters with Generous Touch Padding & Mobile Scroll */}
+        <div className="mt-8 space-y-4">
+          <div className="flex items-center gap-2 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden p-1 bg-slate-100/70 sm:bg-transparent rounded-xl">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mr-1 shrink-0">
               Category:
             </span>
             {categories.map((c) => (
@@ -60,10 +95,10 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onRegisterInterest }
                 key={c}
                 type="button"
                 onClick={() => setActiveCategory(c)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                className={`shrink-0 px-4 py-2.5 sm:px-3.5 sm:py-2 rounded-lg text-xs font-semibold transition-all whitespace-nowrap min-h-[38px] cursor-pointer ${
                   activeCategory === c
                     ? 'bg-slate-900 text-white shadow-xs'
-                    : 'bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200'
+                    : 'bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-50 border border-slate-200/90'
                 }`}
               >
                 {c}
@@ -71,8 +106,8 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onRegisterInterest }
             ))}
           </div>
 
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider mr-2">
+          <div className="flex items-center gap-2 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden p-1 bg-slate-100/70 sm:bg-transparent rounded-xl">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mr-1 shrink-0">
               Status:
             </span>
             {statuses.map((s) => (
@@ -80,10 +115,10 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onRegisterInterest }
                 key={s}
                 type="button"
                 onClick={() => setActiveStatus(s)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                className={`shrink-0 px-4 py-2.5 sm:px-3.5 sm:py-2 rounded-lg text-xs font-semibold transition-all whitespace-nowrap min-h-[38px] cursor-pointer ${
                   activeStatus === s
                     ? 'bg-[#1442CB] text-white shadow-xs'
-                    : 'bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200'
+                    : 'bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-50 border border-slate-200/90'
                 }`}
               >
                 {s}
@@ -97,9 +132,38 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onRegisterInterest }
           {filteredProducts.map((prod) => (
             <div
               key={prod.id}
-              className="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-7 flex flex-col justify-between hover:border-slate-300 transition-all shadow-2xs hover:shadow-sm"
+              className="bg-white rounded-2xl border border-slate-200/90 overflow-hidden flex flex-col justify-between hover:border-slate-300 transition-all shadow-2xs hover:shadow-md group"
             >
-              <div>
+              {/* Product Screenshot Banner if Available (Strict 16:9 Widescreen) */}
+              {prod.heroImage ? (
+                <div
+                  className="w-full aspect-[16/9] bg-slate-950 overflow-hidden relative border-b border-slate-200 cursor-pointer"
+                  onClick={() => {
+                    setPreviewProduct(prod);
+                    setActiveImgIndex(0);
+                  }}
+                >
+                  <img
+                    src={prod.heroImage}
+                    alt={`${prod.name} interface screenshot`}
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
+                  <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5">
+                    {prod.screenshots && prod.screenshots.length > 1 && (
+                      <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-black/60 text-white/90 backdrop-blur-xs">
+                        {prod.screenshots.length} screens
+                      </span>
+                    )}
+                    <span className="p-1 rounded bg-black/60 text-white/90 backdrop-blur-xs hover:text-white" title="Inspect UI">
+                      <Maximize2 className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
+                </div>
+              ) : null}
+
+              <div className="p-6 sm:p-7">
                 <div className="flex items-start justify-between gap-3">
                   <span
                     className={`text-[10px] font-mono uppercase px-2 py-0.5 rounded border ${
@@ -115,7 +179,22 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onRegisterInterest }
                   <span className="text-[11px] text-slate-400">{prod.category}</span>
                 </div>
 
-                <h2 className="text-xl font-bold text-slate-900 mt-3">{prod.name}</h2>
+                <div className="flex items-start justify-between gap-2 mt-3">
+                  <h2 className="text-xl font-bold text-slate-900">{prod.name}</h2>
+                  {prod.screenshots && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setPreviewProduct(prod);
+                        setActiveImgIndex(0);
+                      }}
+                      className="text-[11px] font-semibold text-[#1442CB] hover:underline shrink-0"
+                    >
+                      Inspect UI
+                    </button>
+                  )}
+                </div>
+
                 <p className="text-xs font-medium text-slate-600 mt-1">{prod.tagline}</p>
 
                 <div className="mt-4 pt-4 border-t border-slate-100 space-y-2.5 text-xs">
@@ -161,45 +240,157 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onRegisterInterest }
               </div>
 
               {/* Action Buttons */}
-              <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
-                {prod.actionType === 'explore' && prod.publicUrl && (
-                  <a
-                    href={prod.publicUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-2.5 px-3 bg-[#1442CB] hover:bg-[#0F35A8] text-white text-xs font-semibold rounded-xl text-center transition-colors inline-flex items-center justify-center gap-1.5 shadow-2xs"
-                  >
-                    <span>Explore live product</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                )}
+              <div className="p-6 sm:p-7 pt-0">
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
+                  {prod.actionType === 'explore' && prod.publicUrl && (
+                    <a
+                      href={prod.publicUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full py-2.5 px-3 bg-[#1442CB] hover:bg-[#0F35A8] text-white text-xs font-semibold rounded-xl text-center transition-colors inline-flex items-center justify-center gap-1.5 shadow-2xs"
+                    >
+                      <span>Explore live product</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  )}
 
-                {prod.actionType === 'demo' && prod.publicUrl && (
-                  <a
-                    href={prod.publicUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-2.5 px-3 bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 text-xs font-semibold rounded-xl text-center transition-colors inline-flex items-center justify-center gap-1.5 shadow-2xs"
-                  >
-                    <span>Launch live prototype</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                )}
+                  {prod.actionType === 'demo' && prod.publicUrl && (
+                    <a
+                      href={prod.publicUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full py-2.5 px-3 bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 text-xs font-semibold rounded-xl text-center transition-colors inline-flex items-center justify-center gap-1.5 shadow-2xs"
+                    >
+                      <span>Launch live prototype</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  )}
 
-                {prod.actionType === 'register' && (
-                  <button
-                    type="button"
-                    onClick={() => onRegisterInterest(prod.name)}
-                    className="w-full py-2.5 px-3 bg-amber-500 hover:bg-amber-600 text-white text-xs font-semibold rounded-xl text-center transition-colors inline-flex items-center justify-center gap-1.5 shadow-2xs"
-                  >
-                    <span>Register interest (In Development)</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                )}
+                  {prod.actionType === 'register' && (
+                    <button
+                      type="button"
+                      onClick={() => onRegisterInterest(prod.name)}
+                      className="w-full py-2.5 px-3 bg-amber-500 hover:bg-amber-600 text-white text-xs font-semibold rounded-xl text-center transition-colors inline-flex items-center justify-center gap-1.5 shadow-2xs"
+                    >
+                      <span>Register interest (In Development)</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           ))}
         </div>
+
+        {/* Screenshot Lightbox Modal */}
+        {previewProduct && previewProduct.screenshots && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-slate-950/80 backdrop-blur-sm overflow-hidden touch-none overscroll-none select-none transition-opacity duration-150"
+            onClick={() => setPreviewProduct(null)}
+          >
+            <div
+              className="bg-slate-900 border border-slate-800 text-white rounded-2xl max-w-4xl w-full max-h-[84vh] sm:max-h-[88vh] overflow-hidden flex flex-col shadow-2xl my-auto relative z-10 touch-auto overscroll-contain animate-in zoom-in-95 duration-150"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between gap-4">
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400">
+                    {previewProduct.category} · {previewProduct.status}
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-bold text-white mt-0.5">
+                    {previewProduct.name} Interface Walkthrough
+                  </h3>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  {previewProduct.publicUrl && (
+                    <a
+                      href={previewProduct.publicUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-1.5 bg-[#1442CB] hover:bg-[#0F35A8] text-white rounded-lg text-xs font-semibold inline-flex items-center gap-1.5"
+                    >
+                      <span>Open Live App</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setPreviewProduct(null)}
+                    className="p-1.5 text-slate-400 hover:text-white rounded-lg bg-slate-800/80"
+                    aria-label="Close preview"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Main Image View */}
+              <div className="relative flex-1 bg-black flex items-center justify-center overflow-hidden max-h-[520px] p-2">
+                <img
+                  src={previewProduct.screenshots[activeImgIndex] || previewProduct.heroImage}
+                  alt={`${previewProduct.name} preview screen ${activeImgIndex + 1}`}
+                  className="max-w-full max-h-[500px] object-contain rounded"
+                />
+
+                {previewProduct.screenshots.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setActiveImgIndex((prev) =>
+                          prev === 0 ? previewProduct.screenshots!.length - 1 : prev - 1
+                        )
+                      }
+                      className="absolute left-3 top-1/2 -translate-y-1/2 p-2 bg-black/60 hover:bg-black/90 text-white rounded-full backdrop-blur-xs transition-colors"
+                      aria-label="Previous screen"
+                    >
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setActiveImgIndex((prev) =>
+                          prev === previewProduct.screenshots!.length - 1 ? 0 : prev + 1
+                        )
+                      }
+                      className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-black/60 hover:bg-black/90 text-white rounded-full backdrop-blur-xs transition-colors"
+                      aria-label="Next screen"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {/* Bottom Thumbnails */}
+              {previewProduct.screenshots.length > 1 && (
+                <div className="p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between gap-3 overflow-x-auto">
+                  <span className="text-xs text-slate-400 font-mono">
+                    Screen {activeImgIndex + 1} of {previewProduct.screenshots.length}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    {previewProduct.screenshots.map((img, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => setActiveImgIndex(i)}
+                        className={`h-11 w-16 rounded overflow-hidden border-2 transition-all shrink-0 ${
+                          activeImgIndex === i
+                            ? 'border-[#1442CB] ring-2 ring-blue-500'
+                            : 'border-slate-700 opacity-60 hover:opacity-100'
+                        }`}
+                      >
+                        <img src={img} alt="" className="w-full h-full object-cover" />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </main>
   );

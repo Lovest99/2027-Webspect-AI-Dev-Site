@@ -14,6 +14,8 @@ export interface CaseStudy {
   externalUrl?: string;
   relatedSolutionSlug: string;
   badgeAccent: string;
+  imagePath?: string;
+  galleryImages?: string[];
 }
 
 export const WORK_ITEMS: CaseStudy[] = [
@@ -39,7 +41,9 @@ export const WORK_ITEMS: CaseStudy[] = [
     ],
     techOrTools: ['React', 'TypeScript', 'Tailwind CSS', 'Figma', 'Vector Branding'],
     relatedSolutionSlug: 'digital-presence',
-    badgeAccent: '#D97706'
+    badgeAccent: '#D97706',
+    imagePath: '/assets/aistudio/file_0000000034ec8211943d2fd9091f992f_33a58136.png',
+    galleryImages: ['/assets/aistudio/file_0000000034ec8211943d2fd9091f992f_33a58136.png']
   },
   {
     id: 'mox',
@@ -88,7 +92,12 @@ export const WORK_ITEMS: CaseStudy[] = [
     techOrTools: ['React', 'TypeScript', 'Geolocation API', 'Leaflet', 'Cloud Infrastructure'],
     externalUrl: 'https://mist.co.zw/',
     relatedSolutionSlug: 'product-development',
-    badgeAccent: '#2563EB'
+    badgeAccent: '#2563EB',
+    imagePath: '/assets/aistudio/mist-01-hero-archived_202dda1a.jpg',
+    galleryImages: [
+      '/assets/aistudio/mist-01-hero-archived_202dda1a.jpg',
+      '/assets/aistudio/mist-02-services-archived_7328dbc6.jpg'
+    ]
   },
   {
     id: 'happie',
@@ -136,7 +145,9 @@ export const WORK_ITEMS: CaseStudy[] = [
     ],
     techOrTools: ['React', 'Tailwind CSS', 'Figma', 'Asset Optimization'],
     relatedSolutionSlug: 'digital-presence',
-    badgeAccent: '#4B5563'
+    badgeAccent: '#4B5563',
+    imagePath: '/assets/aistudio/file_0000000012fc821199272b82bcbe0dc1_ec2eb850.png',
+    galleryImages: ['/assets/aistudio/file_0000000012fc821199272b82bcbe0dc1_ec2eb850.png']
   },
   {
     id: 'relay-system',
@@ -161,30 +172,135 @@ export const WORK_ITEMS: CaseStudy[] = [
     techOrTools: ['Node.js', 'Express', 'React', 'Tailwind CSS', 'Webhooks API'],
     externalUrl: 'https://relay-ai-pro.lovable.app/',
     relatedSolutionSlug: 'workflow-automation',
-    badgeAccent: '#059669'
+    badgeAccent: '#059669',
+    imagePath: '/assets/aistudio/relay-01-hero_3d5e6359.jpg',
+    galleryImages: [
+      '/assets/aistudio/relay-01-hero_3d5e6359.jpg',
+      '/assets/aistudio/relay-03-dashboard_3d786d9a.jpg',
+      '/assets/aistudio/relay-04-analytics_0c732112.jpg',
+      '/assets/aistudio/relay-02-auth_83c6b048.jpg'
+    ]
   },
   {
     id: 'dr-shana',
     slug: 'dr-shana-healthcare',
-    title: 'Dr Shana – Clinical Practice Identity & Patient Experience',
-    clientOrProject: 'Dr Shana Medical Consulting',
+    title: 'Dr Shana – Natural Health Formulations & Delivery Distribution',
+    clientOrProject: 'Dr Shana Healthcare & Food Supplements',
     projectType: 'Client project',
-    sector: 'Healthcare & Specialized Clinical Practice',
-    summary: 'Dignified medical practice branding, patient appointment booking journeys, and clear clinical service information.',
-    challenge: 'Patients looking for specialized consultation were overwhelmed by clinical jargon and had to phone during specific desk hours to find consulting times and fee structures.',
-    approach: 'Developed an empathetic, clean medical identity with clear clinic hours, consultation guidelines, and an accessible appointment request workflow.',
+    sector: 'Healthcare & Natural Wellness Products',
+    summary: 'E-commerce and nationwide delivery promotion campaign for herbal food supplements and natural health remedies.',
+    challenge: 'Dr Shana manufactures premium liquid chlorophyll, guarana, and natural supplements in Zimbabwe, but needed clear, high-trust promotional assets that explain health benefits and drive phone/WhatsApp distribution orders.',
+    approach: 'Designed authentic commercial campaign artwork highlighting primary health benefits (detoxification, gut health, immunity) with nationwide delivery callouts and direct order verification.',
     delivered: [
-      'Clean, accessible medical website with patient care guidelines',
-      'Appointment scheduling enquiry form with consultation category selection',
-      'Refined clinical brand stationery, signage guidelines, and patient info sheets',
-      'Fast-loading mobile layout adhering to strict accessibility standards'
+      'High-impact commercial campaign posters for Chlorophyll Plus Guarana and food supplements',
+      'Direct order intake workflows connecting buyers to regional distribution hubs',
+      'Mobile-ready nutritional benefit cards for WhatsApp marketing and social distribution',
+      'Promotional signage guidelines for pharmacies and retail stockists'
     ],
     keyDecisions: [
-      'Maintained a calming, warm neutral aesthetic avoiding sterile cold blue hospital tones',
-      'Highlighted doctor qualifications, consultation fee transparency, and directions prominently'
+      'Emphasized clear product dosage and verified health benefits over generic wellness stock imagery',
+      'Prominently integrated Harare dispatch contact routes and nationwide logistics guarantees'
     ],
-    techOrTools: ['React', 'Accessibility WCAG 2.2 AA', 'Typography', 'Brand Design'],
+    techOrTools: ['Commercial Graphic Design', 'Campaign Collateral', 'Typography', 'Figma'],
     relatedSolutionSlug: 'brand-visibility',
-    badgeAccent: '#4F46E5'
+    badgeAccent: '#059669',
+    imagePath: '/assets/aistudio/file_00000000103c821188fc16c750cdb539_40815e79.png',
+    galleryImages: [
+      '/assets/aistudio/file_00000000103c821188fc16c750cdb539_40815e79.png',
+      '/assets/aistudio/file_0000000005088211b5bd4bc964906c62_4ee6230b.png'
+    ]
+  },
+  {
+    id: 'analytico-ai-study',
+    slug: 'analytico-business-intelligence',
+    title: 'Analytico AI – Multi-Agent Business Intelligence & Predictive Analytics',
+    clientOrProject: 'Analytico AI',
+    projectType: 'Independent product',
+    sector: 'Enterprise Analytics & Executive Reporting',
+    summary: 'A team of five collaborative AI agents that ingest raw business data, model forecasts, and articulate plain-English boardroom summaries.',
+    challenge: 'Business leaders spend hours wrestling with fragmented spreadsheets and SQL queries to compile basic weekly revenue trends and cohort retention numbers.',
+    approach: 'Engineered an intuitive analytics suite with a relationship graph of 5 autonomous agents (Ingestor, Janitor, Analyst, Oracle, Narrator) that clean, model, forecast, and explain corporate KPIs automatically.',
+    delivered: [
+      'Full executive dashboard with live revenue metrics, churn indicators, and blended CAC curves',
+      'Multi-agent collaborative graph interface with real-time status cues',
+      'SOC 2 Type II compliant secure authentication with corporate SSO integration',
+      'Automated board-ready narrative summaries with cited evidence'
+    ],
+    keyDecisions: [
+      'Gave each AI agent a dedicated operational domain to ensure verifiable, deterministic calculations',
+      'Designed a sleek, dark terminal-inspired interface with high-contrast data visualization'
+    ],
+    techOrTools: ['React', 'TypeScript', 'Tailwind CSS', 'Gemini AI API', 'Data Visualization'],
+    externalUrl: 'https://analyze-eloquent.lovable.app',
+    relatedSolutionSlug: 'workflow-automation',
+    badgeAccent: '#1442CB',
+    imagePath: '/assets/aistudio/analytico-01-hero_b8a161d6.jpg',
+    galleryImages: [
+      '/assets/aistudio/analytico-01-hero_b8a161d6.jpg',
+      '/assets/aistudio/analytico-03-dashboard_f6976e62.jpg',
+      '/assets/aistudio/analytico-04-agent-network_1b58c3d0.jpg',
+      '/assets/aistudio/analytico-02-auth_366c2970.jpg'
+    ]
+  },
+  {
+    id: 'clarity-ai-sichel',
+    slug: 'clarity-ai-enterprise-vision',
+    title: 'Clarity AI – Mobile Command Center for Sichel Energies & SIMRAC Zimbabwe',
+    clientOrProject: 'Sichel Energies & SIMRAC Zimbabwe',
+    projectType: 'Client project',
+    sector: 'Commercial Energy, Logistics & Group Operations',
+    summary: 'An executive mobile command center allowing corporate leadership to monitor national energy distribution, fuel reserves, and cashflow in real-time.',
+    challenge: 'Executive leadership needed continuous visibility across regional fuel terminals and logistics fleets without waiting for end-of-day spreadsheet reconciliations.',
+    approach: 'Architected a mobile-first executive dashboard with verified super-admin claims, live tank telemetry integrations, and instant WhatsApp summary pushes.',
+    delivered: [
+      'Mobile-first responsive executive dashboard ("Run your empire from your phone")',
+      'Verified corporate authentication with custom domain email restrictions (@sichel.co.zw)',
+      'Real-time supply chain monitoring with anomaly triggers',
+      'Executive summary memo generator designed for instant decision-making'
+    ],
+    keyDecisions: [
+      'Prioritized biometric mobile login and fast finger-touch ergonomics for leaders on the move',
+      'Engineered an enterprise authentication system with role-based super-admin privileges'
+    ],
+    techOrTools: ['React', 'TypeScript', 'Tailwind CSS', 'Secure Auth', 'Enterprise Cloud'],
+    externalUrl: 'https://clarity-empire-vision.lovable.app/',
+    relatedSolutionSlug: 'product-development',
+    badgeAccent: '#0369A1',
+    imagePath: '/assets/aistudio/clarity-01-hero_1e4dd67f.jpg',
+    galleryImages: [
+      '/assets/aistudio/clarity-01-hero_1e4dd67f.jpg',
+      '/assets/aistudio/clarity-02-auth_c17b6eb4.jpg'
+    ]
+  },
+  {
+    id: 'coverpilot-ops',
+    slug: 'coverpilot-shift-automation',
+    title: 'CoverPilot – Shift Coverage & On-Call Emergency Workforce Dispatch',
+    clientOrProject: 'CoverPilot',
+    projectType: 'Independent product',
+    sector: 'Workforce Operations & Health/Safety Dispatch',
+    summary: 'Automated shift coverage and on-call emergency scheduling eliminating frantic phone calls through instant SMS and WhatsApp replacement alerts.',
+    challenge: 'When a critical industrial or security shift worker calls in absent, managers lose up to 90 minutes frantically calling off-duty workers to find a replacement.',
+    approach: 'Engineered an automated coverage dispatch engine that monitors live shift rosters, calculates compliance and certification rules, and automatically contacts verified standby personnel.',
+    delivered: [
+      'Live shift deficit and coverage heatmap visualizations',
+      'Automated SMS & WhatsApp cascade messaging to qualified workers',
+      'Instant shift acceptance confirmation with direct calendar sync',
+      'Comprehensive audit log of staffing levels for regulatory compliance'
+    ],
+    keyDecisions: [
+      'Implemented automated compliance verification so uncertified workers cannot accidentally be dispatched',
+      'Created visual shift coverage charts displaying 24-hour deficit warnings at a glance'
+    ],
+    techOrTools: ['React', 'TypeScript', 'Scheduling Algorithms', 'Real-time Messaging', 'Tailwind CSS'],
+    externalUrl: 'https://coverpilot-ops.lovable.app/',
+    relatedSolutionSlug: 'workflow-automation',
+    badgeAccent: '#2563EB',
+    imagePath: '/assets/aistudio/coverpilot-01-hero_8848c129.jpg',
+    galleryImages: [
+      '/assets/aistudio/coverpilot-01-hero_8848c129.jpg',
+      '/assets/aistudio/coverpilot-03-coverage-charts_f9e72658.jpg',
+      '/assets/aistudio/coverpilot-02-auth_f228c853.jpg'
+    ]
   }
 ];

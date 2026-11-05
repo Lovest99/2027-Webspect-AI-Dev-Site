@@ -54,15 +54,27 @@ export const ContactFormModal: React.FC<ContactFormModalProps> = ({
     }
   }, [isOpen, initialInterest, initialDescription]);
 
-  // Keyboard escape listener
+  // Keyboard escape listener and background scroll lock
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
         onClose();
       }
     };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+
+    if (isOpen) {
+      const originalOverflow = document.body.style.overflow;
+      const originalTouchAction = document.body.style.touchAction;
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = originalOverflow;
+        document.body.style.touchAction = originalTouchAction;
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    }
   }, [isOpen, onClose]);
 
   const interestOptions = [
@@ -151,14 +163,14 @@ ${initialPackage ? `- Selected Package: ${initialPackage}` : ''}`;
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm overflow-y-auto animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-slate-950/80 backdrop-blur-sm overflow-hidden touch-none overscroll-none select-none transition-opacity duration-150"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label="Project Enquiry Form"
     >
       <div
-        className="bg-white rounded-2xl max-w-xl w-full my-8 shadow-2xl border border-slate-200 p-6 sm:p-8 space-y-6 text-slate-900"
+        className="bg-white rounded-2xl max-w-xl w-full max-h-[84vh] sm:max-h-[88vh] overflow-y-auto shadow-2xl border border-slate-200 p-5 sm:p-8 space-y-6 text-slate-900 my-auto relative z-10 touch-auto overscroll-contain animate-in zoom-in-95 duration-150 [scrollbar-width:thin]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -244,7 +256,7 @@ ${initialPackage ? `- Selected Package: ${initialPackage}` : ''}`;
             {/* Row 1: Name and Business Name */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">
+                <label className="text-xs font-semibold text-slate-700 block mb-1.5">
                   Your Name <span className="text-rose-500">*</span>
                 </label>
                 <input
@@ -255,12 +267,12 @@ ${initialPackage ? `- Selected Package: ${initialPackage}` : ''}`;
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Tendai Moyo"
-                  className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1442CB]"
+                  className="w-full px-4 py-3 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1442CB]/25 focus:border-[#1442CB] transition-all placeholder:text-slate-400 shadow-2xs"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">
+                <label className="text-xs font-semibold text-slate-700 block mb-1.5">
                   Business Name (Optional)
                 </label>
                 <input
@@ -270,7 +282,7 @@ ${initialPackage ? `- Selected Package: ${initialPackage}` : ''}`;
                   value={businessName}
                   onChange={(e) => setBusinessName(e.target.value)}
                   placeholder="e.g. Apex Civil Solutions"
-                  className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1442CB]"
+                  className="w-full px-4 py-3 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1442CB]/25 focus:border-[#1442CB] transition-all placeholder:text-slate-400 shadow-2xs"
                 />
               </div>
             </div>
@@ -278,16 +290,16 @@ ${initialPackage ? `- Selected Package: ${initialPackage}` : ''}`;
             {/* Row 2: Contact Method and Value */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">
+                <label className="text-xs font-semibold text-slate-700 block mb-1.5">
                   Preferred Contact Method
                 </label>
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
                     onClick={() => setContactMethod('whatsapp')}
-                    className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-medium border text-center transition-all ${
+                    className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-semibold border text-center transition-all cursor-pointer ${
                       contactMethod === 'whatsapp'
-                        ? 'bg-blue-50 border-[#1442CB] text-[#1442CB] font-semibold'
+                        ? 'bg-blue-50 border-[#1442CB] text-[#1442CB] shadow-2xs'
                         : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
                     }`}
                   >
@@ -296,9 +308,9 @@ ${initialPackage ? `- Selected Package: ${initialPackage}` : ''}`;
                   <button
                     type="button"
                     onClick={() => setContactMethod('email')}
-                    className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-medium border text-center transition-all ${
+                    className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-semibold border text-center transition-all cursor-pointer ${
                       contactMethod === 'email'
-                        ? 'bg-blue-50 border-[#1442CB] text-[#1442CB] font-semibold'
+                        ? 'bg-blue-50 border-[#1442CB] text-[#1442CB] shadow-2xs'
                         : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
                     }`}
                   >
@@ -308,7 +320,7 @@ ${initialPackage ? `- Selected Package: ${initialPackage}` : ''}`;
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">
+                <label className="text-xs font-semibold text-slate-700 block mb-1.5">
                   {contactMethod === 'whatsapp' ? 'WhatsApp Number' : 'Email Address'}{' '}
                   <span className="text-rose-500">*</span>
                 </label>
@@ -322,20 +334,20 @@ ${initialPackage ? `- Selected Package: ${initialPackage}` : ''}`;
                   placeholder={
                     contactMethod === 'whatsapp' ? '+263 78 ... or local number' : 'name@company.com'
                   }
-                  className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1442CB]"
+                  className="w-full px-4 py-3 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1442CB]/25 focus:border-[#1442CB] transition-all placeholder:text-slate-400 shadow-2xs"
                 />
               </div>
             </div>
 
             {/* Row 3: What do you want to improve? */}
             <div>
-              <label className="text-xs font-semibold text-slate-700 block mb-1">
+              <label className="text-xs font-semibold text-slate-700 block mb-1.5">
                 What do you want to improve?
               </label>
               <select
                 value={interest}
                 onChange={(e) => setInterest(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1442CB]"
+                className="w-full px-4 py-3 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1442CB]/25 focus:border-[#1442CB] transition-all text-slate-900 shadow-2xs"
               >
                 {interestOptions.map((opt) => (
                   <option key={opt} value={opt}>
@@ -347,7 +359,7 @@ ${initialPackage ? `- Selected Package: ${initialPackage}` : ''}`;
 
             {/* Row 4: Short Description */}
             <div>
-              <label className="text-xs font-semibold text-slate-700 block mb-1">
+              <label className="text-xs font-semibold text-slate-700 block mb-1.5">
                 Brief Description of Your Requirements <span className="text-rose-500">*</span>
               </label>
               <textarea
@@ -356,14 +368,14 @@ ${initialPackage ? `- Selected Package: ${initialPackage}` : ''}`;
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="What is the bottleneck or product goal? (e.g., We need a website showing our equipment fleet and tender completions with direct WhatsApp quote requests)"
-                className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1442CB]"
+                className="w-full px-4 py-3 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1442CB]/25 focus:border-[#1442CB] transition-all placeholder:text-slate-400 shadow-2xs"
               />
             </div>
 
             {/* Row 5: Optional Budget and Timeline */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">
+                <label className="text-xs font-semibold text-slate-700 block mb-1.5">
                   Estimated Budget (Optional)
                 </label>
                 <input
@@ -371,12 +383,12 @@ ${initialPackage ? `- Selected Package: ${initialPackage}` : ''}`;
                   value={budget}
                   onChange={(e) => setBudget(e.target.value)}
                   placeholder="e.g. Under $100, $200–$500, Custom"
-                  className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1442CB]"
+                  className="w-full px-4 py-3 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1442CB]/25 focus:border-[#1442CB] transition-all placeholder:text-slate-400 shadow-2xs"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">
+                <label className="text-xs font-semibold text-slate-700 block mb-1.5">
                   Desired Timeline (Optional)
                 </label>
                 <input
@@ -384,7 +396,7 @@ ${initialPackage ? `- Selected Package: ${initialPackage}` : ''}`;
                   value={timeline}
                   onChange={(e) => setTimeline(e.target.value)}
                   placeholder="e.g. Within 2 weeks, Flexible"
-                  className="w-full px-3 py-2 text-sm bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1442CB]"
+                  className="w-full px-4 py-3 text-sm bg-white border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1442CB]/25 focus:border-[#1442CB] transition-all placeholder:text-slate-400 shadow-2xs"
                 />
               </div>
             </div>
@@ -394,7 +406,7 @@ ${initialPackage ? `- Selected Package: ${initialPackage}` : ''}`;
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full sm:w-auto px-6 py-2.5 text-xs sm:text-sm font-semibold text-white bg-[#1442CB] hover:bg-[#0F35A8] disabled:opacity-60 rounded-xl shadow-xs transition-colors flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-6 py-3.5 text-xs sm:text-sm font-semibold text-white bg-[#1442CB] hover:bg-[#0F35A8] disabled:opacity-60 rounded-xl shadow-xs transition-colors flex items-center justify-center gap-2 cursor-pointer"
               >
                 {loading ? (
                   <>
@@ -413,7 +425,7 @@ ${initialPackage ? `- Selected Package: ${initialPackage}` : ''}`;
                 href={whatsappDirectUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto px-4 py-2.5 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors flex items-center justify-center gap-1.5"
+                className="w-full sm:w-auto px-5 py-3.5 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors flex items-center justify-center gap-1.5"
               >
                 <MessageCircle className="w-4 h-4 text-emerald-600" />
                 <span>Chat on WhatsApp instead</span>

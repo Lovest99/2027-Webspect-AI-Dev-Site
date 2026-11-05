@@ -6,8 +6,17 @@ export const PrivacyPage: React.FC = () => {
   const { navigate } = useRouter();
 
   return (
-    <main className="py-16 sm:py-24 bg-[#FAFAF8] min-h-screen">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    <main className="py-16 sm:py-24 bg-[#FAFAF8] min-h-screen relative overflow-hidden">
+      {/* Engineered Canvas Micro-Dot Grid */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
+
+      {/* Atmospheric Pale Blue Light Bloom */}
+      <div
+        className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 w-[800px] h-[360px] bg-gradient-to-b from-[#1442CB]/[0.06] via-[#1442CB]/[0.02] to-transparent blur-3xl"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10">
         <div>
           <a
             href="/"
@@ -19,7 +28,11 @@ export const PrivacyPage: React.FC = () => {
           >
             <ChevronLeft className="w-3.5 h-3.5" /> Back to Home
           </a>
-          <h1 className="text-3xl font-extrabold text-slate-900">Privacy Policy</h1>
+          <h1 className="text-3xl font-extrabold text-slate-900">
+            <span className="bg-gradient-to-r from-slate-900 via-[#1442CB] to-indigo-950 bg-clip-text text-transparent">
+              Privacy Policy
+            </span>
+          </h1>
           <p className="text-xs text-slate-500 mt-1 font-mono">Last updated: October 2026</p>
         </div>
 

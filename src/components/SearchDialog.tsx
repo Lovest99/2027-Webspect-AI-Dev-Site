@@ -23,6 +23,16 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({ isOpen, onClose }) =
       setTimeout(() => inputRef.current?.focus(), 50);
       setQuery('');
       setSelectedIndex(0);
+
+      const originalOverflow = document.body.style.overflow;
+      const originalTouchAction = document.body.style.touchAction;
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+
+      return () => {
+        document.body.style.overflow = originalOverflow;
+        document.body.style.touchAction = originalTouchAction;
+      };
     }
   }, [isOpen]);
 
@@ -211,14 +221,14 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({ isOpen, onClose }) =
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-slate-900/40 backdrop-blur-sm transition-opacity"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-slate-950/80 backdrop-blur-sm overflow-hidden touch-none overscroll-none select-none transition-opacity duration-150"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label="Quick Search"
     >
       <div
-        className="w-full max-w-2xl bg-white rounded-xl shadow-2xl border border-slate-200 overflow-hidden text-slate-900"
+        className="w-full max-w-2xl bg-white rounded-xl shadow-2xl border border-slate-200 overflow-hidden text-slate-900 touch-auto overscroll-contain animate-in zoom-in-95 duration-150"
         onClick={(e) => e.stopPropagation()}
         onKeyDown={handleKeyDown}
       >

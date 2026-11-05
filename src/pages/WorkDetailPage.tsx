@@ -22,8 +22,17 @@ export const WorkDetailPage: React.FC<WorkDetailPageProps> = ({ slug, onOpenCont
   const caseStudy = WORK_ITEMS.find((w) => w.slug === slug) || WORK_ITEMS[0];
 
   return (
-    <main className="py-14 sm:py-20 bg-[#FAFAF8] min-h-screen">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main className="py-14 sm:py-20 bg-[#FAFAF8] min-h-screen relative overflow-hidden">
+      {/* Engineered Canvas Micro-Dot Grid */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
+
+      {/* Atmospheric Pale Blue Radial Light Bloom */}
+      <div
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[850px] h-[360px] bg-gradient-to-b from-[#1442CB]/[0.07] via-[#1E40AF]/[0.02] to-transparent blur-3xl"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs text-slate-500 mb-6">
           <a
@@ -44,7 +53,7 @@ export const WorkDetailPage: React.FC<WorkDetailPageProps> = ({ slug, onOpenCont
         <div>
           <div className="flex items-center gap-3 text-xs mb-3">
             <span
-              className={`font-mono uppercase text-[10px] px-2 py-0.5 rounded border ${
+              className={`font-mono uppercase text-[10px] px-2.5 py-1 rounded-md border ${
                 caseStudy.projectType === 'Client project'
                   ? 'bg-amber-50 text-amber-700 border-amber-200'
                   : 'bg-blue-50 text-[#1442CB] border-blue-200'
@@ -56,7 +65,9 @@ export const WorkDetailPage: React.FC<WorkDetailPageProps> = ({ slug, onOpenCont
           </div>
 
           <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            {caseStudy.title}
+            <span className="bg-gradient-to-r from-slate-900 via-[#1442CB] to-indigo-950 bg-clip-text text-transparent">
+              {caseStudy.title}
+            </span>
           </h1>
 
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
@@ -77,6 +88,58 @@ export const WorkDetailPage: React.FC<WorkDetailPageProps> = ({ slug, onOpenCont
             </div>
           )}
         </div>
+
+        {/* Visual Showcase Gallery */}
+        {caseStudy.imagePath && (
+          <div className="mt-8 bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden shadow-xl">
+            <div className="p-3 sm:p-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between text-xs text-slate-300">
+              <span className="font-mono text-emerald-400 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                Verified Commercial Deliverable Artwork & Screens
+              </span>
+              <span className="text-slate-400 text-[11px]">
+                {caseStudy.clientOrProject}
+              </span>
+            </div>
+
+            <div className="w-full aspect-[16/9] flex items-center justify-center bg-slate-950 overflow-hidden relative">
+              <img
+                src={caseStudy.imagePath}
+                alt={caseStudy.title}
+                className="w-full h-full object-cover object-top rounded-none"
+              />
+            </div>
+
+            {caseStudy.galleryImages && caseStudy.galleryImages.length > 1 && (
+              <div className="p-4 bg-slate-900/90 border-t border-slate-800">
+                <p className="text-[11px] font-mono uppercase text-slate-400 mb-2">
+                  All Deliverable Artifacts ({caseStudy.galleryImages.length} screens / collateral):
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {caseStudy.galleryImages.map((img, i) => (
+                    <a
+                      key={i}
+                      href={img}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group rounded-lg overflow-hidden border border-slate-700 bg-slate-950 relative block aspect-video hover:border-[#1442CB] transition-all"
+                    >
+                      <img
+                        src={img}
+                        alt={`Screen ${i + 1}`}
+                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform"
+                        loading="lazy"
+                      />
+                      <span className="absolute bottom-1 right-1 text-[9px] font-mono bg-black/70 text-white/90 px-1.5 py-0.5 rounded">
+                        View Full
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Tech Stack Bar */}
         <div className="mt-8 p-4 bg-white rounded-xl border border-slate-200 flex flex-wrap items-center gap-2 text-xs">
@@ -169,16 +232,16 @@ export const WorkDetailPage: React.FC<WorkDetailPageProps> = ({ slug, onOpenCont
           <p className="text-xs sm:text-sm text-slate-300 max-w-lg mx-auto">
             Let's discuss how we can adapt this approach for your industry and customer base.
           </p>
-          <div className="pt-2 flex justify-center gap-3">
+          <div className="pt-2 flex flex-wrap justify-center gap-3">
             <button
               onClick={() => onOpenContact(`Inquiry based on ${caseStudy.clientOrProject}`)}
-              className="px-6 py-3 text-xs sm:text-sm font-semibold text-white bg-[#1442CB] hover:bg-[#0F35A8] rounded-xl transition-colors"
+              className="px-6 py-3.5 text-xs sm:text-sm font-semibold text-white bg-[#1442CB] hover:bg-[#0F35A8] rounded-xl shadow-xs transition-colors cursor-pointer"
             >
               Discuss a similar project
             </button>
             <button
               onClick={() => navigate(`/solutions/${caseStudy.relatedSolutionSlug}`)}
-              className="px-5 py-3 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white bg-slate-800 rounded-xl transition-colors"
+              className="px-5 py-3.5 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-750 rounded-xl transition-colors cursor-pointer"
             >
               Explore this solution domain
             </button>

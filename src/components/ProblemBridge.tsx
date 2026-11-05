@@ -149,15 +149,25 @@ export const ProblemBridge: React.FC<ProblemBridgeProps> = ({ onDiscussSolution 
   const Icon = activeChallenge.icon;
 
   return (
-    <section className="py-16 sm:py-20 bg-white border-b border-slate-200/80 relative overflow-hidden">
+    <section className="py-16 sm:py-20 bg-white/75 backdrop-blur-xs border-b border-slate-200/80 relative overflow-hidden">
+      {/* Engineered Canvas Micro-Dot Grid */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-35 pointer-events-none" />
+
+      {/* Atmospheric Pale Blue Light Bloom */}
+      <div
+        className="pointer-events-none absolute -top-20 right-10 w-[600px] h-[350px] bg-gradient-to-b from-[#1442CB]/[0.06] via-transparent to-transparent blur-3xl"
+        aria-hidden="true"
+      />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Heading */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-xs font-semibold text-[#1442CB] uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50/90 border border-blue-200/70 text-xs font-semibold text-[#1442CB] uppercase tracking-wider mb-3 shadow-2xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#1442CB]" />
             <span>Diagnose Your Bottleneck</span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-extrabold tracking-[-0.02em] text-slate-900 leading-tight">
-            What would make business easier?
+            What would make <span className="bg-gradient-to-r from-[#1442CB] via-blue-600 to-indigo-600 bg-clip-text text-transparent">business easier</span>?
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
             Select the primary operational friction or growth hurdle getting in your way right now to see
@@ -257,7 +267,7 @@ export const ProblemBridge: React.FC<ProblemBridgeProps> = ({ onDiscussSolution 
               <button
                 type="button"
                 onClick={() => onDiscussSolution(activeChallenge.recommendedSolution)}
-                className="px-5 py-2.5 text-xs sm:text-sm font-semibold text-white bg-gradient-to-b from-[#1749E9] to-[#1037A8] hover:from-[#1A4FD8] hover:to-[#0F3299] active:scale-[0.98] rounded-xl shadow-xs transition-all inline-flex items-center gap-2 cursor-pointer"
+                className="px-6 py-3.5 text-xs sm:text-sm font-semibold text-white bg-gradient-to-b from-[#1749E9] to-[#1037A8] hover:from-[#1A4FD8] hover:to-[#0F3299] active:scale-[0.98] rounded-xl shadow-xs transition-all inline-flex items-center gap-2 cursor-pointer"
               >
                 <span>Discuss this solution</span>
                 <ArrowRight className="w-4 h-4" />
@@ -266,7 +276,7 @@ export const ProblemBridge: React.FC<ProblemBridgeProps> = ({ onDiscussSolution 
               <button
                 type="button"
                 onClick={() => navigate(`/solutions/${activeChallenge.solutionSlug}`)}
-                className="px-4.5 py-2.5 text-xs sm:text-sm font-semibold text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 rounded-xl border border-slate-300 shadow-2xs transition-colors cursor-pointer"
+                className="px-5 py-3.5 text-xs sm:text-sm font-semibold text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 rounded-xl border border-slate-300 shadow-2xs transition-colors cursor-pointer"
               >
                 Full solution details
               </button>

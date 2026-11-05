@@ -10,6 +10,7 @@ export interface CompanyInfo {
     location: string;
     bio: string;
     specialties: string[];
+    portfolioImage?: string;
   };
   contact: {
     websiteUrl: string;
@@ -47,7 +48,8 @@ export const COMPANY_INFO: CompanyInfo = {
       'System Architecture & API Integrations',
       'Editorial Interface Design & Commercial Graphic Systems',
       'Mobile-First Progressive Web Applications'
-    ]
+    ],
+    portfolioImage: '/assets/aistudio/bright-portfolio-01-hero.jpg'
   },
   contact: {
     websiteUrl: 'https://www.webspectit.com/',

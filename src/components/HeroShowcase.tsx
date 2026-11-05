@@ -269,48 +269,48 @@ export const HeroShowcase: React.FC<HeroShowcaseProps> = ({
               </h2>
             </div>
 
-            {/* Segmented Mode Selector */}
-            <div className="w-full sm:w-auto grid grid-cols-3 sm:flex items-center gap-1 p-1 bg-slate-100 sm:bg-white border border-slate-200 rounded-xl shadow-2xs">
+            {/* Segmented Mode Selector: Fits together with icons, text, and zero horizontal scrolling on all mobile viewports */}
+            <div className="w-full sm:w-auto grid grid-cols-3 sm:flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 bg-slate-100/90 sm:bg-white border border-slate-200/90 rounded-xl shadow-2xs">
               <button
                 type="button"
                 onClick={() => setActiveTab('noticed')}
-                className={`w-full justify-center text-center px-1 py-2 sm:px-3 sm:py-1.5 rounded-lg text-[11px] min-[375px]:text-xs font-semibold transition-all flex items-center justify-center gap-1 sm:gap-1.5 cursor-pointer whitespace-nowrap ${
+                className={`w-full text-center px-1 sm:px-4 py-2 sm:py-2.5 rounded-lg text-[11px] sm:text-xs font-semibold transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-1.5 cursor-pointer min-h-[46px] sm:min-h-[42px] ${
                   activeTab === 'noticed'
-                    ? 'bg-[#1442CB] text-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-white/80 sm:hover:bg-slate-100'
+                    ? 'bg-[#1442CB] text-white shadow-xs font-bold ring-1 ring-[#1442CB]'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-white sm:hover:bg-slate-100'
                 }`}
               >
-                <Globe className="w-3.5 h-3.5 shrink-0 hidden min-[480px]:inline" />
-                <span className="font-mono text-[9.5px] opacity-70 hidden min-[360px]:inline">01.</span>
-                <span>Get noticed</span>
+                <Globe className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                <span className="hidden sm:inline font-mono text-[10px] opacity-75">01.</span>
+                <span className="leading-tight text-center">Get noticed</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setActiveTab('smarter')}
-                className={`w-full justify-center text-center px-1 py-2 sm:px-3 sm:py-1.5 rounded-lg text-[11px] min-[375px]:text-xs font-semibold transition-all flex items-center justify-center gap-1 sm:gap-1.5 cursor-pointer whitespace-nowrap ${
+                className={`w-full text-center px-1 sm:px-4 py-2 sm:py-2.5 rounded-lg text-[11px] sm:text-xs font-semibold transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-1.5 cursor-pointer min-h-[46px] sm:min-h-[42px] ${
                   activeTab === 'smarter'
-                    ? 'bg-[#1442CB] text-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-white/80 sm:hover:bg-slate-100'
+                    ? 'bg-[#1442CB] text-white shadow-xs font-bold ring-1 ring-[#1442CB]'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-white sm:hover:bg-slate-100'
                 }`}
               >
-                <Zap className="w-3.5 h-3.5 shrink-0 hidden min-[480px]:inline" />
-                <span className="font-mono text-[9.5px] opacity-70 hidden min-[360px]:inline">02.</span>
-                <span>Work smarter</span>
+                <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                <span className="hidden sm:inline font-mono text-[10px] opacity-75">02.</span>
+                <span className="leading-tight text-center">Work smarter</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setActiveTab('build')}
-                className={`w-full justify-center text-center px-1 py-2 sm:px-3 sm:py-1.5 rounded-lg text-[11px] min-[375px]:text-xs font-semibold transition-all flex items-center justify-center gap-1 sm:gap-1.5 cursor-pointer whitespace-nowrap ${
+                className={`w-full text-center px-1 sm:px-4 py-2 sm:py-2.5 rounded-lg text-[11px] sm:text-xs font-semibold transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-1.5 cursor-pointer min-h-[46px] sm:min-h-[42px] ${
                   activeTab === 'build'
-                    ? 'bg-[#1442CB] text-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-white/80 sm:hover:bg-slate-100'
+                    ? 'bg-[#1442CB] text-white shadow-xs font-bold ring-1 ring-[#1442CB]'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-white sm:hover:bg-slate-100'
                 }`}
               >
-                <Boxes className="w-3.5 h-3.5 shrink-0 hidden min-[480px]:inline" />
-                <span className="font-mono text-[9.5px] opacity-70 hidden min-[360px]:inline">03.</span>
-                <span>Build new</span>
+                <Boxes className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                <span className="hidden sm:inline font-mono text-[10px] opacity-75">03.</span>
+                <span className="leading-tight text-center">Build new</span>
               </button>
             </div>
           </div>
@@ -350,14 +350,14 @@ export const HeroShowcase: React.FC<HeroShowcaseProps> = ({
                 <div className="pt-2 sm:pt-3 flex flex-wrap items-center gap-2.5">
                   <button
                     onClick={() => navigate('/solutions/digital-presence')}
-                    className="px-3.5 py-2 text-xs font-semibold text-white bg-[#1442CB] hover:bg-[#0F35A8] rounded-xl transition-colors inline-flex items-center gap-1.5 cursor-pointer shadow-xs"
+                    className="px-4 py-2.5 sm:px-4.5 sm:py-2.5 text-xs font-semibold text-white bg-[#1442CB] hover:bg-[#0F35A8] rounded-xl transition-colors inline-flex items-center gap-1.5 cursor-pointer shadow-xs"
                   >
                     <span>Explore digital presence</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                   <button
                     onClick={() => navigate('/work/multivate-construction')}
-                    className="px-3.5 py-2 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors cursor-pointer"
+                    className="px-4 py-2.5 sm:px-4.5 sm:py-2.5 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors cursor-pointer"
                   >
                     View Multivate case study
                   </button>
@@ -376,17 +376,17 @@ export const HeroShowcase: React.FC<HeroShowcaseProps> = ({
                       <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
                       <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
                     </div>
-                    <div className="flex items-center gap-1.5 px-2 py-0.5 bg-slate-900/90 border border-slate-700/60 rounded-md text-[11px] font-mono text-slate-300">
+                    <div className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-900/90 border border-slate-700/60 rounded-md text-[11px] font-mono text-slate-300">
                       <Lock className="w-3 h-3 text-emerald-400" />
                       <span>multivateconstruction.co.zw</span>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-1 bg-slate-900/90 p-0.5 rounded-lg border border-slate-700/60">
+                  <div className="flex items-center gap-1 bg-slate-900/90 p-1 rounded-lg border border-slate-700/60">
                     <button
                       type="button"
                       onClick={() => setNoticedView('catalogue')}
-                      className={`px-2.5 py-0.5 rounded text-[11px] font-medium transition-colors cursor-pointer ${
+                      className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors cursor-pointer ${
                         noticedView === 'catalogue'
                           ? 'bg-[#1442CB] text-white shadow-2xs'
                           : 'text-slate-400 hover:text-white'
@@ -397,7 +397,7 @@ export const HeroShowcase: React.FC<HeroShowcaseProps> = ({
                     <button
                       type="button"
                       onClick={() => setNoticedView('whatsapp')}
-                      className={`px-2.5 py-0.5 rounded text-[11px] font-medium transition-colors cursor-pointer ${
+                      className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors cursor-pointer ${
                         noticedView === 'whatsapp'
                           ? 'bg-[#1442CB] text-white shadow-2xs'
                           : 'text-slate-400 hover:text-white'
@@ -511,7 +511,7 @@ export const HeroShowcase: React.FC<HeroShowcaseProps> = ({
                 <div className="pt-2 sm:pt-3 flex flex-wrap items-center gap-2.5">
                   <button
                     onClick={() => navigate('/solutions/workflow-automation')}
-                    className="px-3.5 py-2 text-xs font-semibold text-white bg-[#1442CB] hover:bg-[#0F35A8] rounded-xl transition-colors inline-flex items-center gap-1.5 cursor-pointer shadow-xs"
+                    className="px-4 py-2.5 sm:px-4.5 sm:py-2.5 text-xs font-semibold text-white bg-[#1442CB] hover:bg-[#0F35A8] rounded-xl transition-colors inline-flex items-center gap-1.5 cursor-pointer shadow-xs"
                   >
                     <span>See workflow automation</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -521,7 +521,7 @@ export const HeroShowcase: React.FC<HeroShowcaseProps> = ({
                       setQuoteApproved(false);
                       setIncludeExpress(false);
                     }}
-                    className="px-3.5 py-2 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors cursor-pointer"
+                    className="px-4 py-2.5 sm:px-4.5 sm:py-2.5 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors cursor-pointer"
                   >
                     Reset demo
                   </button>
@@ -538,14 +538,14 @@ export const HeroShowcase: React.FC<HeroShowcaseProps> = ({
                   </span>
 
                   {/* Preset Selector */}
-                  <div className="flex items-center gap-1 bg-slate-900 p-0.5 rounded-lg border border-slate-700/60 text-xs">
+                  <div className="flex items-center gap-1 bg-slate-900 p-1 rounded-lg border border-slate-700/60 text-xs">
                     <button
                       type="button"
                       onClick={() => {
                         setSelectedQuotePreset('glazing');
                         setQuoteApproved(false);
                       }}
-                      className={`px-2 py-0.5 rounded cursor-pointer transition-colors ${
+                      className={`px-3 py-1.5 rounded-md cursor-pointer transition-colors text-xs font-medium ${
                         selectedQuotePreset === 'glazing'
                           ? 'bg-[#1442CB] text-white shadow-2xs font-semibold'
                           : 'text-slate-400 hover:text-white'
@@ -559,7 +559,7 @@ export const HeroShowcase: React.FC<HeroShowcaseProps> = ({
                         setSelectedQuotePreset('epoxy');
                         setQuoteApproved(false);
                       }}
-                      className={`px-2 py-0.5 rounded cursor-pointer transition-colors ${
+                      className={`px-3 py-1.5 rounded-md cursor-pointer transition-colors text-xs font-medium ${
                         selectedQuotePreset === 'epoxy'
                           ? 'bg-[#1442CB] text-white shadow-2xs font-semibold'
                           : 'text-slate-400 hover:text-white'
@@ -573,7 +573,7 @@ export const HeroShowcase: React.FC<HeroShowcaseProps> = ({
                         setSelectedQuotePreset('hygiene');
                         setQuoteApproved(false);
                       }}
-                      className={`px-2 py-0.5 rounded cursor-pointer transition-colors ${
+                      className={`px-3 py-1.5 rounded-md cursor-pointer transition-colors text-xs font-medium ${
                         selectedQuotePreset === 'hygiene'
                           ? 'bg-[#1442CB] text-white shadow-2xs font-semibold'
                           : 'text-slate-400 hover:text-white'
@@ -649,13 +649,13 @@ export const HeroShowcase: React.FC<HeroShowcaseProps> = ({
                       <button
                         type="button"
                         onClick={() => setQuoteApproved(true)}
-                        className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg shadow-sm transition-colors flex items-center justify-center gap-1.5 shrink-0 cursor-pointer"
+                        className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-xl shadow-xs transition-colors flex items-center justify-center gap-1.5 shrink-0 cursor-pointer"
                       >
                         <FileCheck className="w-3.5 h-3.5" />
                         <span>Sign Off & Send</span>
                       </button>
                     ) : (
-                      <div className="px-3 py-1 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[11px] rounded-md font-medium text-center">
+                      <div className="px-3.5 py-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[11px] rounded-lg font-medium text-center">
                         Dispatched in 1.4s · PDF Generated
                       </div>
                     )}
@@ -700,14 +700,14 @@ export const HeroShowcase: React.FC<HeroShowcaseProps> = ({
                 <div className="pt-2 sm:pt-3 flex flex-wrap items-center gap-2.5">
                   <button
                     onClick={() => navigate('/solutions/product-development')}
-                    className="px-3.5 py-2 text-xs font-semibold text-white bg-[#1442CB] hover:bg-[#0F35A8] rounded-xl transition-colors inline-flex items-center gap-1.5 cursor-pointer shadow-xs"
+                    className="px-4 py-2.5 sm:px-4.5 sm:py-2.5 text-xs font-semibold text-white bg-[#1442CB] hover:bg-[#0F35A8] rounded-xl transition-colors inline-flex items-center gap-1.5 cursor-pointer shadow-xs"
                   >
                     <span>Discuss my product idea</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                   <button
                     onClick={() => navigate('/products')}
-                    className="px-3.5 py-2 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors cursor-pointer"
+                    className="px-4 py-2.5 sm:px-4.5 sm:py-2.5 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors cursor-pointer"
                   >
                     Explore all products
                   </button>
@@ -726,11 +726,11 @@ export const HeroShowcase: React.FC<HeroShowcaseProps> = ({
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-1 bg-slate-900 p-0.5 rounded-lg border border-slate-700/60 text-xs">
+                  <div className="flex items-center gap-1 bg-slate-900 p-1 rounded-lg border border-slate-700/60 text-xs">
                     <button
                       type="button"
                       onClick={() => setBuildView('dispatch')}
-                      className={`px-2.5 py-0.5 rounded cursor-pointer transition-colors ${
+                      className={`px-3 py-1.5 rounded-md cursor-pointer transition-colors text-xs font-medium ${
                         buildView === 'dispatch'
                           ? 'bg-[#1442CB] text-white shadow-2xs font-semibold'
                           : 'text-slate-400 hover:text-white'
@@ -741,7 +741,7 @@ export const HeroShowcase: React.FC<HeroShowcaseProps> = ({
                     <button
                       type="button"
                       onClick={() => setBuildView('architecture')}
-                      className={`px-2.5 py-0.5 rounded cursor-pointer transition-colors ${
+                      className={`px-3 py-1.5 rounded-md cursor-pointer transition-colors text-xs font-medium ${
                         buildView === 'architecture'
                           ? 'bg-[#1442CB] text-white shadow-2xs font-semibold'
                           : 'text-slate-400 hover:text-white'

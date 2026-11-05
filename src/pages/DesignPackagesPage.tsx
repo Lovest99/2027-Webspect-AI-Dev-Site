@@ -22,15 +22,25 @@ export const DesignPackagesPage: React.FC<DesignPackagesPageProps> = ({ onOrderP
   const [includeLogo, setIncludeLogo] = useState<boolean>(false);
 
   return (
-    <main className="py-16 sm:py-24 bg-[#FAFAF8] min-h-screen">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main className="py-16 sm:py-24 bg-[#FAFAF8] min-h-screen relative overflow-hidden">
+      {/* Engineered Canvas Micro-Dot Grid */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
+
+      {/* Atmospheric Pale Blue Radial Light Bloom */}
+      <div
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[380px] bg-gradient-to-b from-[#1442CB]/[0.07] via-[#1E40AF]/[0.02] to-transparent blur-3xl"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto">
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#1442CB] block mb-2">
-            Confirmed Commercial Pricing
-          </span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50/90 border border-blue-200/70 text-xs font-semibold text-[#1442CB] uppercase tracking-wider mb-3 shadow-2xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#1442CB]" />
+            <span>Confirmed Commercial Pricing</span>
+          </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            Design Packages for Serious Brands
+            Design Packages for <span className="bg-gradient-to-r from-[#1442CB] via-blue-600 to-indigo-600 bg-clip-text text-transparent">Serious Brands</span>
           </h1>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
             Elevate your commercial visibility with high-impact promotional posters and social artwork
@@ -64,9 +74,9 @@ export const DesignPackagesPage: React.FC<DesignPackagesPageProps> = ({ onOrderP
           <button
             type="button"
             onClick={() => setIncludeLogo(!includeLogo)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all shrink-0 ${
+            className={`px-4 py-2 rounded-xl text-xs font-semibold border transition-all shrink-0 cursor-pointer ${
               includeLogo
-                ? 'bg-blue-50 border-[#1442CB] text-[#1442CB]'
+                ? 'bg-blue-50 border-[#1442CB] text-[#1442CB] shadow-2xs'
                 : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
             }`}
           >
@@ -167,7 +177,7 @@ export const DesignPackagesPage: React.FC<DesignPackagesPageProps> = ({ onOrderP
                         }`
                       )
                     }
-                    className={`w-full py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+                    className={`w-full py-3.5 px-5 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                       pkg.isPopular
                         ? 'bg-[#1442CB] hover:bg-[#0F35A8] text-white shadow-xs'
                         : 'bg-slate-900 hover:bg-slate-800 text-white'
@@ -184,7 +194,7 @@ export const DesignPackagesPage: React.FC<DesignPackagesPageProps> = ({ onOrderP
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-2 px-3 text-center text-xs font-medium text-slate-600 hover:text-slate-900 block"
+                    className="w-full py-2.5 px-4 text-center text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-50 hover:bg-slate-100 border border-slate-200/80 rounded-xl transition-colors block cursor-pointer"
                   >
                     Order via WhatsApp
                   </a>
@@ -192,6 +202,95 @@ export const DesignPackagesPage: React.FC<DesignPackagesPageProps> = ({ onOrderP
               </div>
             );
           })}
+        </div>
+
+        {/* Delivered Artwork Proof Showcase */}
+        <div className="mt-16 bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-10 shadow-2xs">
+          <div className="max-w-2xl">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#1442CB] block mb-1">
+              Proof of Craft & Delivery
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+              Recent <span className="bg-gradient-to-r from-[#1442CB] via-blue-600 to-indigo-600 bg-clip-text text-transparent">delivered client artwork</span>.
+            </h2>
+            <p className="mt-2 text-xs sm:text-sm text-slate-600">
+              Every graphic is designed custom for your commercial audience—high contrast typography, calibrated color psychology, and direct call-to-action routing.
+            </p>
+          </div>
+
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="rounded-xl overflow-hidden border border-slate-200 bg-slate-900 group shadow-sm flex flex-col justify-between">
+              <div className="aspect-[4/5] overflow-hidden bg-slate-950 flex items-center justify-center relative">
+                <img
+                  src="/assets/aistudio/file_0000000034ec8211943d2fd9091f992f_33a58136.png"
+                  alt="Multivate Construction promotional artwork"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+                <span className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500 text-slate-950 shadow-xs">
+                  Construction & Civil
+                </span>
+              </div>
+              <div className="p-3.5 bg-white border-t border-slate-100">
+                <p className="font-bold text-xs text-slate-900 truncate">Multivate Construction</p>
+                <p className="text-[11px] text-slate-500 mt-0.5">Campaign refresh poster</p>
+              </div>
+            </div>
+
+            <div className="rounded-xl overflow-hidden border border-slate-200 bg-slate-900 group shadow-sm flex flex-col justify-between">
+              <div className="aspect-[4/5] overflow-hidden bg-slate-950 flex items-center justify-center relative">
+                <img
+                  src="/assets/aistudio/file_0000000012fc821199272b82bcbe0dc1_ec2eb850.png"
+                  alt="General Aluminium Solutions promotional artwork"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+                <span className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-white shadow-xs">
+                  Architectural Glazing
+                </span>
+              </div>
+              <div className="p-3.5 bg-white border-t border-slate-100">
+                <p className="font-bold text-xs text-slate-900 truncate">General Aluminium Solutions</p>
+                <p className="text-[11px] text-slate-500 mt-0.5">"Frame Your Space" campaign</p>
+              </div>
+            </div>
+
+            <div className="rounded-xl overflow-hidden border border-slate-200 bg-slate-900 group shadow-sm flex flex-col justify-between">
+              <div className="aspect-[4/5] overflow-hidden bg-slate-950 flex items-center justify-center relative">
+                <img
+                  src="/assets/aistudio/file_00000000103c821188fc16c750cdb539_40815e79.png"
+                  alt="Dr Shana Herbs & Food Supplements promotional artwork"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+                <span className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-600 text-white shadow-xs">
+                  Health & Supplements
+                </span>
+              </div>
+              <div className="p-3.5 bg-white border-t border-slate-100">
+                <p className="font-bold text-xs text-slate-900 truncate">Dr Shana Herbs & Supplements</p>
+                <p className="text-[11px] text-slate-500 mt-0.5">Nationwide delivery poster</p>
+              </div>
+            </div>
+
+            <div className="rounded-xl overflow-hidden border border-slate-200 bg-slate-900 group shadow-sm flex flex-col justify-between">
+              <div className="aspect-[4/5] overflow-hidden bg-slate-950 flex items-center justify-center relative">
+                <img
+                  src="/assets/aistudio/file_0000000005088211b5bd4bc964906c62_4ee6230b.png"
+                  alt="Dr Shana Liquid Chlorophyll Plus Guarana promotional artwork"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+                <span className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-600 text-white shadow-xs">
+                  Herbal Wellness
+                </span>
+              </div>
+              <div className="p-3.5 bg-white border-t border-slate-100">
+                <p className="font-bold text-xs text-slate-900 truncate">Dr Shana Chlorophyll Plus</p>
+                <p className="text-[11px] text-slate-500 mt-0.5">Formulation spotlight & benefits</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Custom Web & Software Scope Notice */}

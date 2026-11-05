@@ -8,15 +8,25 @@ interface HowWeWorkProps {
 
 export const HowWeWork: React.FC<HowWeWorkProps> = ({ onStartProject }) => {
   return (
-    <section className="py-12 sm:py-16 bg-[#FAFAF8] border-b border-slate-200/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-14 sm:py-20 bg-[#FAFAF8] border-b border-slate-200/80 relative overflow-hidden">
+      {/* Engineered Canvas Micro-Dot Grid */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
+
+      {/* Atmospheric Pale Blue Radial Light Bloom */}
+      <div
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[340px] bg-gradient-to-b from-[#1442CB]/[0.06] via-[#1E40AF]/[0.02] to-transparent blur-3xl"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="max-w-3xl">
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#1442CB] block mb-1.5">
-            Engagement & Delivery
-          </span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50/90 border border-blue-200/70 text-xs font-semibold text-[#1442CB] uppercase tracking-wider mb-2.5 shadow-2xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#1442CB]" />
+            <span>Engagement & Delivery</span>
+          </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            From a business challenge to something useful.
+            From a business challenge to <span className="bg-gradient-to-r from-[#1442CB] via-blue-600 to-indigo-600 bg-clip-text text-transparent">something useful</span>.
           </h2>
           <p className="mt-2 text-xs sm:text-sm text-slate-600">
             We work in transparent, collaborative milestones. Deliverables, technical boundaries, and
@@ -29,7 +39,7 @@ export const HowWeWork: React.FC<HowWeWorkProps> = ({ onStartProject }) => {
           {COMPANY_INFO.howWeWorkStages.map((stage) => (
             <div
               key={stage.step}
-              className="bg-white rounded-xl border border-slate-200/90 p-5 shadow-2xs flex flex-col justify-between"
+              className="bg-white rounded-xl border border-slate-200/90 p-5 sm:p-6 shadow-2xs flex flex-col justify-between"
             >
               <div>
                 <span className="font-mono text-2xl font-black text-[#1442CB] block">
@@ -51,14 +61,14 @@ export const HowWeWork: React.FC<HowWeWorkProps> = ({ onStartProject }) => {
         </div>
 
         {/* Reassurance banner */}
-        <div className="mt-10 p-5 bg-white rounded-2xl border border-slate-200/90 shadow-2xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="mt-10 p-6 bg-white rounded-2xl border border-slate-200/90 shadow-2xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="text-xs sm:text-sm text-slate-700">
             <strong>No speculative retainers or hourly surprises:</strong> Scope, timeline, and exact
             deliverables are agreed before kickoff.
           </div>
           <button
             onClick={onStartProject}
-            className="px-5 py-2.5 text-xs sm:text-sm font-semibold text-white bg-[#1442CB] hover:bg-[#0F35A8] rounded-xl transition-colors shrink-0"
+            className="px-6 py-3.5 text-xs sm:text-sm font-semibold text-white bg-[#1442CB] hover:bg-[#0F35A8] rounded-xl shadow-xs transition-colors shrink-0 cursor-pointer"
           >
             Start a project discussion
           </button>

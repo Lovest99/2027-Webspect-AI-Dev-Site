@@ -20,15 +20,25 @@ export const CompanyPage: React.FC<CompanyPageProps> = ({ onOpenContact }) => {
   const { founder, principles, howWeWorkStages, contact } = COMPANY_INFO;
 
   return (
-    <main className="py-16 sm:py-24 bg-[#FAFAF8] min-h-screen">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    <main className="py-16 sm:py-24 bg-[#FAFAF8] min-h-screen relative overflow-hidden">
+      {/* Engineered Canvas Micro-Dot Grid */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
+
+      {/* Atmospheric Pale Blue Radial Light Bloom */}
+      <div
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[380px] bg-gradient-to-b from-[#1442CB]/[0.07] via-[#1E40AF]/[0.02] to-transparent blur-3xl"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 relative z-10">
         {/* Page Hero */}
         <div className="max-w-3xl">
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#1442CB] block mb-2">
-            Company & Philosophy
-          </span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50/90 border border-blue-200/70 text-xs font-semibold text-[#1442CB] uppercase tracking-wider mb-3 shadow-2xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#1442CB]" />
+            <span>Company & Philosophy</span>
+          </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            Direct, disciplined digital product development.
+            Direct, <span className="bg-gradient-to-r from-[#1442CB] via-blue-600 to-indigo-600 bg-clip-text text-transparent">disciplined digital product development</span>.
           </h1>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
             {COMPANY_INFO.positioningStatement}
@@ -36,8 +46,22 @@ export const CompanyPage: React.FC<CompanyPageProps> = ({ onOpenContact }) => {
         </div>
 
         {/* Founder Profile Section */}
-        <div className="bg-white rounded-2xl border border-slate-200/90 p-8 sm:p-10 shadow-2xs">
-          <div className="flex flex-col md:flex-row items-start gap-8">
+        <div className="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-2xs">
+          <div className="w-full aspect-[16/9] sm:aspect-[21/9] bg-slate-950 overflow-hidden border-b border-slate-200 relative group">
+            <img
+              src={founder.portfolioImage || '/assets/aistudio/bright-portfolio-01-hero.jpg'}
+              alt="Bright Cheteni engineering portfolio header"
+              className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+            <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs font-mono text-white/90">
+              <span className="bg-black/60 px-2.5 py-1 rounded backdrop-blur-xs">brightcheteni.dev</span>
+              <span className="text-emerald-400 font-semibold bg-black/60 px-2.5 py-1 rounded backdrop-blur-xs">Verified Engineering Track Record</span>
+            </div>
+          </div>
+
+          <div className="p-8 sm:p-10 flex flex-col md:flex-row items-start gap-8">
             <div className="w-24 h-24 rounded-2xl bg-[#0A1128] text-white flex items-center justify-center font-bold text-3xl shadow-sm shrink-0">
               BC
             </div>
@@ -135,10 +159,10 @@ export const CompanyPage: React.FC<CompanyPageProps> = ({ onOpenContact }) => {
               Reach Bright directly via WhatsApp or start a project inquiry.
             </p>
           </div>
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
             <button
               onClick={onOpenContact}
-              className="px-5 py-2.5 text-xs font-semibold text-white bg-[#1442CB] hover:bg-[#0F35A8] rounded-xl transition-colors"
+              className="px-6 py-3.5 text-xs sm:text-sm font-semibold text-white bg-[#1442CB] hover:bg-[#0F35A8] rounded-xl shadow-xs transition-colors cursor-pointer"
             >
               Start conversation
             </button>
@@ -146,9 +170,9 @@ export const CompanyPage: React.FC<CompanyPageProps> = ({ onOpenContact }) => {
               href={contact.whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2.5 text-xs font-semibold text-slate-200 bg-slate-800 hover:bg-slate-700 rounded-xl transition-colors flex items-center gap-1.5"
+              className="px-5 py-3.5 text-xs sm:text-sm font-semibold text-slate-200 bg-slate-800 hover:bg-slate-700 rounded-xl border border-slate-700 transition-colors flex items-center gap-2 cursor-pointer"
             >
-              <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
+              <MessageCircle className="w-4 h-4 text-emerald-400" />
               <span>WhatsApp</span>
             </a>
           </div>
