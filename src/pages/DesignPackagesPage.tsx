@@ -291,6 +291,20 @@ export const DesignPackagesPage: React.FC<DesignPackagesPageProps> = ({ onOrderP
               </div>
             </div>
           </div>
+
+          <div className="mt-6 pt-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4">
+            <p className="text-xs text-slate-500">
+              Also delivered: <strong>Deepstone Legacy</strong> 3D isometric brand mark, <strong>Multivate</strong> Kumusha apparel merch, <strong>Happie</strong> Arthur Ford cosmetics & energy drinks wholesale flyers, <strong>Mox</strong> & <strong>Bofadem</strong> barbershop campaigns.
+            </p>
+            <button
+              onClick={() => navigate('/#brand-designs')}
+              className="text-xs font-semibold text-[#1442CB] hover:underline inline-flex items-center gap-1 cursor-pointer"
+            >
+              <span>Explore complete brand gallery</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
         </div>
 
         {/* Custom Web & Software Scope Notice */}

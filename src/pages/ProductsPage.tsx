@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import {
   Boxes,
   ExternalLink,
@@ -281,117 +282,123 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onRegisterInterest }
             </div>
           ))}
         </div>
+      </div>
 
-        {/* Screenshot Lightbox Modal */}
-        {previewProduct && previewProduct.screenshots && (
+
+      {/* Screenshot Lightbox Modal Portaled to body */}
+      {typeof document !== 'undefined' && previewProduct && previewProduct.screenshots && createPortal(
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-5 bg-slate-950/85 backdrop-blur-md overflow-hidden touch-none overscroll-none select-none transition-opacity duration-150"
+          onClick={() => setPreviewProduct(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${previewProduct.name} preview walkthrough`}
+        >
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-slate-950/80 backdrop-blur-sm overflow-hidden touch-none overscroll-none select-none transition-opacity duration-150"
-            onClick={() => setPreviewProduct(null)}
+            className="bg-slate-900 border border-slate-800 text-white rounded-2xl max-w-[calc(100vw-1.5rem)] sm:max-w-4xl w-full max-h-[80dvh] sm:max-h-[85vh] overflow-hidden flex flex-col shadow-2xl my-auto relative z-10 touch-auto overscroll-contain animate-in zoom-in-95 duration-150"
+            onClick={(e) => e.stopPropagation()}
           >
-            <div
-              className="bg-slate-900 border border-slate-800 text-white rounded-2xl max-w-4xl w-full max-h-[84vh] sm:max-h-[88vh] overflow-hidden flex flex-col shadow-2xl my-auto relative z-10 touch-auto overscroll-contain animate-in zoom-in-95 duration-150"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Modal Header */}
-              <div className="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between gap-4">
-                <div>
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400">
-                    {previewProduct.category} · {previewProduct.status}
-                  </span>
-                  <h3 className="text-lg sm:text-xl font-bold text-white mt-0.5">
-                    {previewProduct.name} Interface Walkthrough
-                  </h3>
-                </div>
+            {/* Modal Header */}
+            <div className="px-4 py-3 sm:px-5 sm:py-3.5 border-b border-slate-800 flex items-center justify-between gap-3 shrink-0">
+              <div className="min-w-0 pr-2">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400">
+                  {previewProduct.category} · {previewProduct.status}
+                </span>
+                <h3 className="text-base sm:text-xl font-bold text-white mt-0.5 truncate">
+                  {previewProduct.name} Interface Walkthrough
+                </h3>
+              </div>
 
-                <div className="flex items-center gap-2">
-                  {previewProduct.publicUrl && (
-                    <a
-                      href={previewProduct.publicUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-3 py-1.5 bg-[#1442CB] hover:bg-[#0F35A8] text-white rounded-lg text-xs font-semibold inline-flex items-center gap-1.5"
-                    >
-                      <span>Open Live App</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                  )}
+              <div className="flex items-center gap-2 shrink-0">
+                {previewProduct.publicUrl && (
+                  <a
+                    href={previewProduct.publicUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1.5 bg-[#1442CB] hover:bg-[#0F35A8] text-white rounded-lg text-xs font-semibold inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+                  >
+                    <span>Open Live App</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                )}
+                <button
+                  type="button"
+                  onClick={() => setPreviewProduct(null)}
+                  className="p-1.5 text-slate-400 hover:text-white rounded-lg bg-slate-800/80 transition-colors cursor-pointer"
+                  aria-label="Close preview"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Main Image View */}
+            <div className="relative flex-1 min-h-0 bg-black flex items-center justify-center overflow-hidden p-2">
+              <img
+                src={previewProduct.screenshots[activeImgIndex] || previewProduct.heroImage}
+                alt={`${previewProduct.name} preview screen ${activeImgIndex + 1}`}
+                className="max-w-full max-h-[46dvh] sm:max-h-[480px] object-contain rounded"
+              />
+
+              {previewProduct.screenshots.length > 1 && (
+                <>
                   <button
                     type="button"
-                    onClick={() => setPreviewProduct(null)}
-                    className="p-1.5 text-slate-400 hover:text-white rounded-lg bg-slate-800/80"
-                    aria-label="Close preview"
+                    onClick={() =>
+                      setActiveImgIndex((prev) =>
+                        prev === 0 ? previewProduct.screenshots!.length - 1 : prev - 1
+                      )
+                    }
+                    className="absolute left-3 top-1/2 -translate-y-1/2 p-2 bg-black/60 hover:bg-black/90 text-white rounded-full backdrop-blur-xs transition-colors cursor-pointer"
+                    aria-label="Previous screen"
                   >
-                    <X className="w-5 h-5" />
+                    <ChevronLeft className="w-5 h-5" />
                   </button>
-                </div>
-              </div>
-
-              {/* Main Image View */}
-              <div className="relative flex-1 bg-black flex items-center justify-center overflow-hidden max-h-[520px] p-2">
-                <img
-                  src={previewProduct.screenshots[activeImgIndex] || previewProduct.heroImage}
-                  alt={`${previewProduct.name} preview screen ${activeImgIndex + 1}`}
-                  className="max-w-full max-h-[500px] object-contain rounded"
-                />
-
-                {previewProduct.screenshots.length > 1 && (
-                  <>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setActiveImgIndex((prev) =>
-                          prev === 0 ? previewProduct.screenshots!.length - 1 : prev - 1
-                        )
-                      }
-                      className="absolute left-3 top-1/2 -translate-y-1/2 p-2 bg-black/60 hover:bg-black/90 text-white rounded-full backdrop-blur-xs transition-colors"
-                      aria-label="Previous screen"
-                    >
-                      <ChevronLeft className="w-5 h-5" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setActiveImgIndex((prev) =>
-                          prev === previewProduct.screenshots!.length - 1 ? 0 : prev + 1
-                        )
-                      }
-                      className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-black/60 hover:bg-black/90 text-white rounded-full backdrop-blur-xs transition-colors"
-                      aria-label="Next screen"
-                    >
-                      <ChevronRight className="w-5 h-5" />
-                    </button>
-                  </>
-                )}
-              </div>
-
-              {/* Bottom Thumbnails */}
-              {previewProduct.screenshots.length > 1 && (
-                <div className="p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between gap-3 overflow-x-auto">
-                  <span className="text-xs text-slate-400 font-mono">
-                    Screen {activeImgIndex + 1} of {previewProduct.screenshots.length}
-                  </span>
-                  <div className="flex items-center gap-2">
-                    {previewProduct.screenshots.map((img, i) => (
-                      <button
-                        key={i}
-                        type="button"
-                        onClick={() => setActiveImgIndex(i)}
-                        className={`h-11 w-16 rounded overflow-hidden border-2 transition-all shrink-0 ${
-                          activeImgIndex === i
-                            ? 'border-[#1442CB] ring-2 ring-blue-500'
-                            : 'border-slate-700 opacity-60 hover:opacity-100'
-                        }`}
-                      >
-                        <img src={img} alt="" className="w-full h-full object-cover" />
-                      </button>
-                    ))}
-                  </div>
-                </div>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setActiveImgIndex((prev) =>
+                        prev === previewProduct.screenshots!.length - 1 ? 0 : prev + 1
+                      )
+                    }
+                    className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-black/60 hover:bg-black/90 text-white rounded-full backdrop-blur-xs transition-colors cursor-pointer"
+                    aria-label="Next screen"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </>
               )}
             </div>
+
+            {/* Bottom Thumbnails */}
+            {previewProduct.screenshots.length > 1 && (
+              <div className="p-2.5 sm:p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between gap-3 overflow-x-auto shrink-0">
+                <span className="text-[11px] sm:text-xs text-slate-400 font-mono shrink-0">
+                  Screen {activeImgIndex + 1} of {previewProduct.screenshots.length}
+                </span>
+                <div className="flex items-center gap-2 overflow-x-auto">
+                  {previewProduct.screenshots.map((img, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => setActiveImgIndex(i)}
+                      className={`h-9 sm:h-11 w-14 sm:w-16 rounded overflow-hidden border-2 transition-all shrink-0 cursor-pointer ${
+                        activeImgIndex === i
+                          ? 'border-[#1442CB] ring-2 ring-blue-500'
+                          : 'border-slate-700 opacity-60 hover:opacity-100'
+                      }`}
+                    >
+                      <img src={img} alt="" className="w-full h-full object-cover" />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </div>,
+        document.body
+      )}
     </main>
+
   );
 };

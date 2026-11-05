@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import {
   X,
   Send,
@@ -161,42 +162,44 @@ ${initialPackage ? `- Selected Package: ${initialPackage}` : ''}`;
 
   if (!isOpen) return null;
 
-  return (
+  const modalElement = (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-slate-950/80 backdrop-blur-sm overflow-hidden touch-none overscroll-none select-none transition-opacity duration-150"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-5 bg-slate-950/85 backdrop-blur-md overflow-hidden touch-none overscroll-none select-none transition-opacity duration-150"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label="Project Enquiry Form"
     >
       <div
-        className="bg-white rounded-2xl max-w-xl w-full max-h-[84vh] sm:max-h-[88vh] overflow-y-auto shadow-2xl border border-slate-200 p-5 sm:p-8 space-y-6 text-slate-900 my-auto relative z-10 touch-auto overscroll-contain animate-in zoom-in-95 duration-150 [scrollbar-width:thin]"
+        className="bg-white rounded-2xl max-w-[calc(100vw-1.5rem)] sm:max-w-xl w-full max-h-[80dvh] sm:max-h-[85vh] overflow-hidden flex flex-col shadow-2xl border border-slate-200 text-slate-900 my-auto relative z-10 touch-auto overscroll-contain animate-in zoom-in-95 duration-150"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
-        <div className="flex items-start justify-between gap-4 border-b border-slate-100 pb-4">
-          <div>
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#1442CB]">
+        {/* Pinned Header (Stiff / Fixed) */}
+        <div className="px-4 py-3 sm:px-6 sm:py-3.5 border-b border-slate-100 bg-slate-50/90 flex items-start justify-between gap-3 shrink-0">
+          <div className="min-w-0 pr-2">
+            <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-[#1442CB]">
               Start a Conversation
             </span>
-            <h3 className="text-xl font-bold text-slate-900 mt-1">
+            <h3 className="text-base sm:text-lg font-bold text-slate-900 mt-0.5 truncate">
               Tell us about your project
             </h3>
-            <p className="text-xs text-slate-500 mt-0.5">
-              Direct consultation with Bright Cheteni · Scoped around your business
+            <p className="text-[11px] text-slate-500 truncate">
+              Direct consultation with Bright Cheteni · Tailored scope
             </p>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg bg-slate-100 transition-colors"
+            className="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg bg-slate-200/70 hover:bg-slate-200 transition-colors shrink-0 cursor-pointer"
             aria-label="Close form"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Success Screen (Rendered ONLY after real backend acceptance) */}
-        {successData ? (
+        {/* Scrollable Body */}
+        <div className="p-4 sm:p-6 overflow-y-auto min-h-0 flex-1 space-y-5 text-slate-900 overscroll-contain [scrollbar-width:thin]">
+          {/* Success Screen (Rendered ONLY after real backend acceptance) */}
+          {successData ? (
           <div className="py-8 text-center space-y-4">
             <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto">
               <CheckCircle2 className="w-8 h-8" />
@@ -432,12 +435,16 @@ ${initialPackage ? `- Selected Package: ${initialPackage}` : ''}`;
               </a>
             </div>
 
-            <p className="text-[11px] text-slate-400 text-center">
-              We never share your information. Direct engineering consultation.
-            </p>
-          </form>
-        )}
+              <p className="text-[11px] text-slate-400 text-center">
+                We never share your information. Direct engineering consultation.
+              </p>
+            </form>
+          )}
+        </div>
       </div>
     </div>
   );
+
+  return typeof document !== 'undefined' ? createPortal(modalElement, document.body) : null;
 };
+

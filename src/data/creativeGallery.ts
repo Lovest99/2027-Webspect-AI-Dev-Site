@@ -1,7 +1,7 @@
 export interface CreativeDesign {
   id: string;
   client: string;
-  category: 'Construction & Industrial' | 'Corporate Services' | 'Beauty & Retail' | 'Healthcare & Consulting';
+  category: 'Construction & Industrial' | 'Corporate Services' | 'Beauty & Retail' | 'Healthcare & Consulting' | 'Entertainment & Music';
   headline: string;
   briefSummary: string;
   imagePath?: string;
@@ -15,11 +15,13 @@ export interface CreativeDesign {
   typographyStyle: string;
   deliverables: string[];
   dimensions: string;
+  location?: string;
+  contactRef?: string;
 }
 
 export const CREATIVE_DESIGNS: CreativeDesign[] = [
   {
-    id: 'multivate',
+    id: 'multivate-refresh',
     client: 'Multivate Construction',
     category: 'Construction & Industrial',
     headline: 'Your home called. It wants a refresh.',
@@ -30,59 +32,65 @@ export const CREATIVE_DESIGNS: CreativeDesign[] = [
       primary: '#0F172A',
       secondary: '#DC2626',
       accent: '#2563EB',
-      surface: '#FEF2F2'
+      surface: '#FEF2F2',
     },
     typographyStyle: 'Bold industrial headline with vibrant WhatsApp REFRESH call-to-action',
     deliverables: ['Home Refresh Campaign Poster', 'Renovations & Painting Flyer', 'WhatsApp Intake Artwork'],
-    dimensions: '1080 x 1350 (Portrait Feed) & 1080 x 1920 (Status)'
+    dimensions: '1080 x 1350 (Portrait Feed) & 1080 x 1920 (Status)',
+    location: 'Bulawayo & National Zimbabwe',
+    contactRef: '+263 771 982 902 / +263 774 787 950',
   },
   {
-    id: 'mox',
-    client: 'Professional Mox',
-    category: 'Corporate Services',
-    headline: 'Executive Commercial Cleaning & Facility Hygiene',
-    briefSummary: 'Corporate visual suite communicating immaculate hygiene, specialized fumigation, and corporate office prestige for B2B procurement managers.',
+    id: 'multivate-kumusha-scheme',
+    client: 'Multivate Construction',
+    category: 'Construction & Industrial',
+    headline: "Kumusha is more than a location. It's the home you're building towards.",
+    briefSummary: 'Diaspora property development campaign for the Kumusha Development Scheme, detailing 60% upfront and 40% instalment milestones for building modern homesteads back home.',
     brandColors: {
-      primary: '#042F2E',
-      secondary: '#0D9488',
-      accent: '#2DD4BF',
-      surface: '#CCFBF1'
-    },
-    typographyStyle: 'Clean modern neo-grotesque sans with refined geometric spacing',
-    deliverables: ['Corporate Hygiene Package Flyer', 'Deep Cleaning Checklist Poster', 'Executive Office Care Promo'],
-    dimensions: '1080 x 1080 (Square) & 1080 x 1920 (Status)'
-  },
-  {
-    id: 'happie-cosmetics',
-    client: 'Happie Cosmetics',
-    category: 'Beauty & Retail',
-    headline: 'Radiant Skin, Everyday Luxury & Vibrant Beauty',
-    briefSummary: 'Vibrant, editorial beauty retail campaign showcasing premium skincare, body washes, and cosmetics formulated for glowing skin in sunny climates.',
-    brandColors: {
-      primary: '#831843',
-      secondary: '#BE185D',
-      accent: '#F472B6',
-      surface: '#FDF2F8'
-    },
-    typographyStyle: 'Elegant luxury serif paired with airy tracking for high fashion aesthetic',
-    deliverables: ['Glow Skincare Collection Launch', 'Weekend Beauty Specials Flyer', 'Product Benefit Spotlight Series'],
-    dimensions: '1080 x 1350 (Portrait) & 1080 x 1920 (Status)'
-  },
-  {
-    id: 'happie-enterprise',
-    client: 'Happie Enterprise',
-    category: 'Beauty & Retail',
-    headline: 'Wholesale Commodities & FMCG Bulk Distribution',
-    briefSummary: 'Clean, legible commercial wholesale pricing posters designed for rapid comprehension in busy trade hubs and high-volume merchant WhatsApp groups.',
-    brandColors: {
-      primary: '#1E1B4B',
-      secondary: '#4338CA',
+      primary: '#1E293B',
+      secondary: '#B45309',
       accent: '#F59E0B',
-      surface: '#EEF2FF'
+      surface: '#FFFBEB',
     },
-    typographyStyle: 'High-legibility tabular numerals with bold promotional price tags',
-    deliverables: ['Weekly Bulk Rate Sheet', 'Container Arrival Notice', 'Wholesale Partner Tier Cards'],
-    dimensions: '1080 x 1080 (Square) & 1080 x 1920 (Status)'
+    typographyStyle: 'Evocative diaspora narrative typography with transparent milestone schedule',
+    deliverables: ['Diaspora Homestead Campaign Poster', 'Instalment Milestone Breakdown', 'Kumusha Development Intake Deck'],
+    dimensions: '1080 x 1350 (Portrait)',
+    location: 'Bulawayo & Diaspora Client Network',
+    contactRef: '+263 771 982 902',
+  },
+  {
+    id: 'multivate-kumusha-merch',
+    client: 'Multivate Construction',
+    category: 'Construction & Industrial',
+    headline: 'Vaka Neshasha! Kumusha Development Scheme Branded Apparel',
+    briefSummary: 'Custom apparel and merchandise identity system featuring front chest emblem badge and back roundhouse architectural illustration on charcoal crewneck sweaters.',
+    brandColors: {
+      primary: '#18181B',
+      secondary: '#D97706',
+      accent: '#E4E4E7',
+      surface: '#27272A',
+    },
+    typographyStyle: 'Architectural badge stamp paired with heritage motto "Vaka Neshasha!"',
+    deliverables: ['Sweater Mockup Identity', 'Embroidery & Screenprint Vectors', 'Staff & Partner Merchandise Suite'],
+    dimensions: '1080 x 1080 (Merch Mockup)',
+    location: 'Bulawayo, Zimbabwe',
+  },
+  {
+    id: 'deepstone-legacy',
+    client: 'Deepstone Legacy Construction & Engineering',
+    category: 'Construction & Industrial',
+    headline: 'Engineered Solidity: 3D Isometric Brand Mark & Visual Identity',
+    briefSummary: 'A high-precision 3D isometric brand mark intertwining a bold navy "DS" structural block with a vibrant lime green "L" foundation beam, engineered for heavy civil contracting.',
+    brandColors: {
+      primary: '#0A1931',
+      secondary: '#65A30D',
+      accent: '#84CC16',
+      surface: '#F7FEE7',
+    },
+    typographyStyle: 'Heavy geometric sans with wide tracking for industrial dominance',
+    deliverables: ['3D Isometric Logo Mark', 'Corporate Stationery & Site Signage', 'Civil Engineering Brand Guidelines'],
+    dimensions: '1080 x 1080 (Square Brand Mark)',
+    location: 'Zimbabwe',
   },
   {
     id: 'general-aluminium',
@@ -96,49 +104,213 @@ export const CREATIVE_DESIGNS: CreativeDesign[] = [
       primary: '#0B2545',
       secondary: '#DC2626',
       accent: '#38BDF8',
-      surface: '#F0F9FF'
+      surface: '#F0F9FF',
     },
     typographyStyle: 'Architectural drafting-inspired typography with bold red accent action bar',
     deliverables: ['Frame Your Space Master Campaign', 'Sliding Doors & Windows Spec Flyer', 'Direct Quote Request Artwork'],
-    dimensions: '1080 x 1350 (Portrait) & 1080 x 1920 (Status)'
+    dimensions: '1080 x 1350 (Portrait) & 1080 x 1920 (Status)',
+    location: 'Southerton, Harare',
   },
   {
-    id: 'dr-shana',
+    id: 'dr-shana-sea-cucumber',
     client: 'Dr Shana Herbs & Food Supplements',
     category: 'Healthcare & Consulting',
-    headline: 'Herbs & Supplements. Delivered to You.',
-    briefSummary: 'Commercial food supplement product launch poster with Bulawayo delivery routing, featuring Revicell, Yeegarlic, Ganoderma, and Ginseng.',
-    imagePath: '/assets/aistudio/file_00000000103c821188fc16c750cdb539_40815e79.png',
-    galleryImages: [
-      '/assets/aistudio/file_00000000103c821188fc16c750cdb539_40815e79.png',
-      '/assets/aistudio/file_0000000005088211b5bd4bc964906c62_4ee6230b.png'
-    ],
+    headline: 'Discover The Range. DI Sea Cucumber Jelly',
+    briefSummary: 'Luxury emerald and gold commercial campaign poster for bottled sea cucumber jelly with Bulawayo local delivery and nationwide courier logistics integration.',
     brandColors: {
       primary: '#064E3B',
-      secondary: '#15803D',
-      accent: '#D97706',
-      surface: '#FEF3C7'
+      secondary: '#B45309',
+      accent: '#FBBF24',
+      surface: '#ECFDF5',
     },
-    typographyStyle: 'Premium botanical serif with golden header flourishes and high-clarity ordering badges',
-    deliverables: ['Full Product Range Showcase', 'Bulawayo Delivery Callout Flyer', 'WhatsApp Product List Order Poster'],
-    dimensions: '1080 x 1350 (Portrait) & 1080 x 1920 (Status)'
+    typographyStyle: 'Opulent botanical serif with golden archway framing and delivery badge triad',
+    deliverables: ['Luxury Product Launch Poster', 'Bulawayo Delivery WhatsApp Flyer', 'Packaging Display Card'],
+    dimensions: '1080 x 1350 (Portrait Feed)',
+    location: 'Bulawayo CBD & Courier Network',
+    contactRef: '0779 613 612 | 0712 94 6213',
   },
   {
     id: 'dr-shana-guarana',
     client: 'Dr Shana Herbs & Food Supplements',
     category: 'Healthcare & Consulting',
     headline: 'Liquid Chlorophyll Plus Guarana – Your Next Product Enquiry, Simplified.',
-    briefSummary: 'High-conversion single-product showcase engineered for WhatsApp status and social channels with ordering support and ingredient guides.',
+    briefSummary: 'High-conversion single-product showcase engineered for WhatsApp status and social channels with ordering support, ingredient spotlight, and dosage guidance.',
     imagePath: '/assets/aistudio/file_0000000005088211b5bd4bc964906c62_4ee6230b.png',
     galleryImages: ['/assets/aistudio/file_0000000005088211b5bd4bc964906c62_4ee6230b.png'],
     brandColors: {
       primary: '#064E3B',
       secondary: '#047857',
       accent: '#10B981',
-      surface: '#ECFDF5'
+      surface: '#ECFDF5',
     },
     typographyStyle: 'Refined herbal luxury layout with ingredients checklist and WhatsApp order triggers',
     deliverables: ['Liquid Chlorophyll Spotlight Poster', 'Ingredient & Direction Checklist', 'WhatsApp Direct Order Route'],
-    dimensions: '1080 x 1350 (Portrait) & 1080 x 1920 (Status)'
-  }
+    dimensions: '1080 x 1350 (Portrait) & 1080 x 1920 (Status)',
+    location: 'Bulawayo & Nationwide Zimbabwe',
+    contactRef: '0779 613 612 | 0712 94 6213',
+  },
+  {
+    id: 'dr-shana-full-range',
+    client: 'Dr Shana Herbs & Food Supplements',
+    category: 'Healthcare & Consulting',
+    headline: 'Herbs & Supplements. Delivered to You.',
+    briefSummary: 'Comprehensive commercial product launch poster with Bulawayo delivery routing, featuring Revicell, Yeegarlic, Ganoderma, Ginseng, and Pro-LSB.',
+    imagePath: '/assets/aistudio/file_00000000103c821188fc16c750cdb539_40815e79.png',
+    galleryImages: [
+      '/assets/aistudio/file_00000000103c821188fc16c750cdb539_40815e79.png',
+      '/assets/aistudio/file_0000000005088211b5bd4bc964906c62_4ee6230b.png',
+    ],
+    brandColors: {
+      primary: '#064E3B',
+      secondary: '#15803D',
+      accent: '#D97706',
+      surface: '#FEF3C7',
+    },
+    typographyStyle: 'Premium botanical serif with golden header flourishes and high-clarity ordering badges',
+    deliverables: ['Full Product Range Showcase', 'Bulawayo Delivery Callout Flyer', 'WhatsApp Product List Order Poster'],
+    dimensions: '1080 x 1350 (Portrait) & 1080 x 1920 (Status)',
+    location: 'Bulawayo CBD',
+    contactRef: '0779 613 612 | 0712 94 6213',
+  },
+  {
+    id: 'dr-shana-pro-lsb',
+    client: 'Dr Shana Herbs & Food Supplements',
+    category: 'Healthcare & Consulting',
+    headline: 'Meet PRO-LSB: Natural Gut Microbiome & Vitality Tablets',
+    briefSummary: 'Teal and metallic gold wellness supplement campaign focusing on cellular digestion, immunity support, and WhatsApp product consultation.',
+    brandColors: {
+      primary: '#115E59',
+      secondary: '#0F766E',
+      accent: '#F59E0B',
+      surface: '#F0FDFA',
+    },
+    typographyStyle: 'Clinical clarity paired with warm emerald herbal cues',
+    deliverables: ['PRO-LSB Product Focus Poster', 'Dosage & Benefits Infographic', 'Customer Consultation Flyer'],
+    dimensions: '1080 x 1350 (Portrait)',
+    location: 'Bulawayo, Zimbabwe',
+  },
+  {
+    id: 'happie-cosmetics-arthur-ford',
+    client: 'Happie Cosmetics',
+    category: 'Beauty & Retail',
+    headline: 'Your Next Signature Scent. Arthur Ford Coral #002',
+    briefSummary: 'High-fashion editorial perfume campaign in warm coral pink and rich burgundy, engineered for wholesale and retail fragrance distribution with direct WhatsApp ordering.',
+    brandColors: {
+      primary: '#831843',
+      secondary: '#BE185D',
+      accent: '#F472B6',
+      surface: '#FDF2F8',
+    },
+    typographyStyle: 'Editorial luxury serif paired with airy tracking for high fashion prestige',
+    deliverables: ['Arthur Ford Coral Campaign Poster', 'Wholesale & Retail Price Flyer', 'WhatsApp Fragrance Catalog Art'],
+    dimensions: '1080 x 1350 (Portrait)',
+    location: 'Bulawayo & Nationwide Distribution',
+    contactRef: 'WhatsApp 0774 542 561',
+  },
+  {
+    id: 'happie-enterprise-wholesale',
+    client: 'Happie Enterprise',
+    category: 'Beauty & Retail',
+    headline: 'Energy Drinks Wholesale. Dragon & Switch R300 wholesale price.',
+    briefSummary: 'High-contrast commercial trading flyer with integrated EcoCash Cash-In/Cash-Out, bulk beverage rates, and airtime wholesale distribution details.',
+    brandColors: {
+      primary: '#1E1B4B',
+      secondary: '#DC2626',
+      accent: '#F59E0B',
+      surface: '#EEF2FF',
+    },
+    typographyStyle: 'High-legibility commercial pricing tags with bold EcoCash payment badge',
+    deliverables: ['Energy Drinks Wholesale Flyer', 'EcoCash Cash In/Out Agent Notice', 'Bulk Airtime Trade Sheet'],
+    dimensions: '1080 x 1350 (Portrait Feed)',
+    location: 'Bulawayo Trade Hub',
+    contactRef: 'WhatsApp 0774 542 561',
+  },
+  {
+    id: 'mox-barber-kids',
+    client: 'Professional Mox Barber Manyama',
+    category: 'Corporate Services',
+    headline: 'Small Gents. Big Style. Premium Kids Haircuts',
+    briefSummary: 'Royal gold and velvet black barber salon campaign promoting expert children styling and father-and-son grooming experiences at Sterling Plaza, Bulawayo CBD.',
+    brandColors: {
+      primary: '#1C1917',
+      secondary: '#B45309',
+      accent: '#F59E0B',
+      surface: '#FFFBEB',
+    },
+    typographyStyle: 'Refined royal barber typography with ornate golden chair centerpiece',
+    deliverables: ['Kids Haircut Campaign Poster', 'Salon Service Menu Flyer', 'Sterling Plaza Location Signage Art'],
+    dimensions: '1080 x 1350 (Portrait Feed)',
+    location: 'Sterling Plaza, 1st Floor, Shop 24, Bulawayo CBD',
+    contactRef: '078 164 6332 | 071 022 2634',
+  },
+  {
+    id: 'mox-oleander-fresh-cut',
+    client: 'Oleander Beauty Salon & Mox Barber',
+    category: 'Corporate Services',
+    headline: 'Fresh Cut Energy: "I only came for a haircut. Now I need somewhere to go."',
+    briefSummary: 'Witty, lifestyle-driven salon & barbershop campaign on Jaison Moyo Street, celebrating confidence, immaculate fades, and head-turning styling.',
+    brandColors: {
+      primary: '#09090B',
+      secondary: '#D97706',
+      accent: '#FB923C',
+      surface: '#FAFAFA',
+    },
+    typographyStyle: 'Punchy street culture display font with high-contrast social quote',
+    deliverables: ['Fresh Cut Energy Campaign Poster', 'Social Media Quotation Series', 'Street Level Walk-In Banner'],
+    dimensions: '1080 x 1350 (Portrait)',
+    location: 'Jaison Moyo Street, Bulawayo CBD',
+  },
+  {
+    id: 'bofadem-barber-looks',
+    client: 'Bofadem Barber & Salon',
+    category: 'Corporate Services',
+    headline: "What's Your Next Look? Fades, Clean Cuts, Braids & Precision Styling",
+    briefSummary: 'Dynamic 4-photo grooming collage poster showcasing taper fades, clean beard trims, braids, and razor-sharp line-ups at ZBS Shopping Centre.',
+    brandColors: {
+      primary: '#0F172A',
+      secondary: '#3B82F6',
+      accent: '#38BDF8',
+      surface: '#F8FAFC',
+    },
+    typographyStyle: 'Modern geometric street font with 4-way style grid inspection',
+    deliverables: ['Style Choice Collage Poster', 'ZBS Shopping Centre Location Flyer', 'Barber Service Price List'],
+    dimensions: '1080 x 1350 (Portrait Feed)',
+    location: 'ZBS Shopping Centre',
+    contactRef: '+263 77 984 8559',
+  },
+  {
+    id: 'bofadem-barber-details',
+    client: 'Bofadem Barber & Salon',
+    category: 'Corporate Services',
+    headline: 'The Details Make The Look. Fresh fades. Clean lines.',
+    briefSummary: 'Close-up editorial focus on master barber craft, sharp hairlines, and personalized consultations in high-density urban shopping centers.',
+    brandColors: {
+      primary: '#18181B',
+      secondary: '#2563EB',
+      accent: '#60A5FA',
+      surface: '#F4F4F5',
+    },
+    typographyStyle: 'Minimalist craftsmanship layout with high-focus fade photography',
+    deliverables: ['Craftsmanship Spotlight Poster', 'Quick Walk-in WhatsApp Booking Artwork', 'Grooming Checklist'],
+    dimensions: '1080 x 1350 (Portrait)',
+    location: 'ZBS Shopping Centre',
+    contactRef: '+263 77 984 8559',
+  },
+  {
+    id: 'lexar-beats',
+    client: 'Lexar - Lord of the Beats',
+    category: 'Entertainment & Music',
+    headline: 'Introducing Lexar: Turn It Up. Follow on TikTok.',
+    briefSummary: 'High-energy electronic neon orange artist promotional flyer designed for music producers, beatmakers, audio engineers, and TikTok creator followings.',
+    brandColors: {
+      primary: '#0C0A09',
+      secondary: '#EA580C',
+      accent: '#FB923C',
+      surface: '#FFF7ED',
+    },
+    typographyStyle: 'Futuristic soundwave typography with glowing neon orange drop-caps',
+    deliverables: ['TikTok Artist Launch Poster', 'Music Producer Beat-Tape Cover Artwork', 'Soundcloud & Spotify Banner Pack'],
+    dimensions: '1080 x 1350 (Portrait Feed)',
+    location: 'Zimbabwe / Digital Audio',
+  },
 ];

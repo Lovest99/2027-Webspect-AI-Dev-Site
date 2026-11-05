@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import {
   Palette,
   Eye,
@@ -8,6 +9,9 @@ import {
   CheckCircle2,
   Info,
   Layers,
+  MapPin,
+  PhoneCall,
+  MessageCircle,
 } from 'lucide-react';
 import { CREATIVE_DESIGNS, CreativeDesign } from '../data/creativeGallery';
 import { useRouter } from '../context/RouterContext';
@@ -17,7 +21,14 @@ export const CreativeGallery: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [activeModalDesign, setActiveModalDesign] = useState<CreativeDesign | null>(null);
 
-  const categories = ['All', 'Construction & Industrial', 'Corporate Services', 'Beauty & Retail', 'Healthcare & Consulting'];
+  const categories = [
+    'All',
+    'Construction & Industrial',
+    'Corporate Services',
+    'Beauty & Retail',
+    'Healthcare & Consulting',
+    'Entertainment & Music',
+  ];
 
   const filteredDesigns = selectedCategory === 'All'
     ? CREATIVE_DESIGNS
@@ -42,6 +53,154 @@ export const CreativeGallery: React.FC = () => {
       };
     }
   }, [activeModalDesign]);
+
+  const modalElement = activeModalDesign ? (
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-5 bg-slate-950/85 backdrop-blur-md overflow-hidden touch-none overscroll-none select-none transition-opacity duration-150"
+      onClick={() => setActiveModalDesign(null)}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${activeModalDesign.client} design brief`}
+    >
+      <div
+        className="bg-white rounded-2xl max-w-[calc(100vw-1.5rem)] sm:max-w-2xl w-full max-h-[80dvh] sm:max-h-[85vh] overflow-hidden flex flex-col shadow-2xl border border-slate-200/90 my-auto relative z-10 touch-auto overscroll-contain animate-in zoom-in-95 duration-150"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Modal Header (Fixed / Stiff - Never overlaps) */}
+        <div className="px-4 py-3 sm:px-5 sm:py-3.5 border-b border-slate-200 bg-slate-50/95 shrink-0 flex items-start justify-between gap-3">
+          <div className="min-w-0 pr-2">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#1442CB]">
+              {activeModalDesign.category}
+            </span>
+            <h3 className="text-base sm:text-xl font-bold text-slate-900 mt-0.5 leading-snug truncate">
+              {activeModalDesign.client}
+            </h3>
+          </div>
+          <button
+            onClick={() => setActiveModalDesign(null)}
+            className="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg bg-slate-200/70 hover:bg-slate-200 transition-colors shrink-0 cursor-pointer"
+            aria-label="Close modal"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Modal Scrollable Body (Internal scroll only) */}
+        <div className="p-3.5 sm:p-5 overflow-y-auto min-h-0 flex-1 space-y-4 text-slate-800 text-xs sm:text-sm overscroll-contain [scrollbar-width:thin]">
+          {/* Full Poster Presentation Preview */}
+          {activeModalDesign.imagePath ? (
+            <div className="rounded-xl overflow-hidden border border-slate-200 bg-slate-900 shadow-xs flex items-center justify-center relative group">
+              <img
+                src={activeModalDesign.imagePath}
+                alt={`${activeModalDesign.client} delivered poster design`}
+                className="w-full max-h-[38dvh] sm:max-h-[380px] object-contain object-center"
+              />
+              <div className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-600 text-white shadow-xs">
+                Delivered Client Artwork
+              </div>
+            </div>
+          ) : (
+            <div
+              className="p-5 sm:p-6 rounded-xl flex flex-col justify-between min-h-[220px] text-white shadow-inner relative overflow-hidden"
+              style={{ backgroundColor: activeModalDesign.brandColors.primary }}
+            >
+              <div className="flex justify-between items-center text-xs">
+                <span className="font-mono text-white/70 text-[10px]">PROMOTIONAL IDENTITY SPEC</span>
+                <span
+                  className="px-2 py-0.5 rounded text-[10px] font-bold"
+                  style={{
+                    backgroundColor: activeModalDesign.brandColors.accent,
+                    color: activeModalDesign.brandColors.primary,
+                  }}
+                >
+                  APPROVED COLLATERAL
+                </span>
+              </div>
+
+              <div className="my-4">
+                <h4 className="text-lg sm:text-2xl font-black leading-tight">
+                  "{activeModalDesign.headline}"
+                </h4>
+                <p className="text-xs text-white/80 mt-1.5 font-medium">
+                  Style: {activeModalDesign.typographyStyle}
+                </p>
+              </div>
+
+              <div className="pt-3 border-t border-white/20 flex justify-between text-[11px] text-white/70">
+                <span>Aspect: {activeModalDesign.dimensions}</span>
+                <span className="font-bold text-white">Webspect AI & Dev</span>
+              </div>
+            </div>
+          )}
+
+          {/* Design Brief Breakdown */}
+          <div className="space-y-3">
+            <div>
+              <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                Client Design Brief & Context
+              </h4>
+              <p className="text-xs sm:text-sm text-slate-700 mt-1 leading-relaxed">
+                {activeModalDesign.briefSummary}
+              </p>
+            </div>
+
+            {/* Location & Contact Meta if available */}
+            {(activeModalDesign.location || activeModalDesign.contactRef) && (
+              <div className="flex flex-wrap items-center gap-3 p-2.5 bg-slate-50 rounded-lg border border-slate-200/80 text-xs text-slate-600">
+                {activeModalDesign.location && (
+                  <span className="inline-flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-slate-500" />
+                    <span>{activeModalDesign.location}</span>
+                  </span>
+                )}
+                {activeModalDesign.contactRef && (
+                  <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-slate-700">
+                    <PhoneCall className="w-3.5 h-3.5 text-slate-500" />
+                    <span>{activeModalDesign.contactRef}</span>
+                  </span>
+                )}
+              </div>
+            )}
+
+            <div>
+              <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                Supplied Deliverables
+              </h4>
+              <ul className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {activeModalDesign.deliverables.map((del, i) => (
+                  <li
+                    key={i}
+                    className="text-xs text-slate-700 bg-slate-50 p-2 sm:p-2.5 rounded-lg border border-slate-200/70 flex items-center gap-2"
+                  >
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <span>{del}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Modal Action Footer (Fixed, Fluid, Centered) */}
+        <div className="p-3 sm:p-3.5 border-t border-slate-200 bg-slate-50/95 shrink-0 flex items-center justify-between gap-3">
+          <span className="text-[11px] sm:text-xs text-slate-500 truncate">
+            Packages from $10 · Fast 24–48h turnaround
+          </span>
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              onClick={() => {
+                setActiveModalDesign(null);
+                navigate('/design-packages');
+              }}
+              className="px-3.5 py-2 text-xs font-semibold text-white bg-[#1442CB] hover:bg-[#0F35A8] rounded-xl shadow-xs transition-colors cursor-pointer"
+            >
+              Order Similar Artwork
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  ) : null;
 
   return (
     <section className="py-12 sm:py-16 bg-[#FAFAF8]/95 relative overflow-hidden border-b border-slate-200/80">
@@ -227,8 +386,8 @@ export const CreativeGallery: React.FC = () => {
               )}
 
               {/* Card Footer Breakdown */}
-              <div className="p-5 bg-white space-y-3">
-                <p className="text-xs text-slate-600 leading-relaxed">
+              <div className="p-4 sm:p-5 bg-white space-y-3">
+                <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
                   {design.briefSummary}
                 </p>
 
@@ -245,144 +404,25 @@ export const CreativeGallery: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setActiveModalDesign(design)}
-                    className="text-xs font-semibold text-[#1442CB] hover:underline flex items-center gap-1"
+                    className="text-xs font-semibold text-[#1442CB] hover:underline flex items-center gap-1 cursor-pointer"
                   >
                     Inspect brief & details <ArrowRight className="w-3.5 h-3.5" />
                   </button>
+                  {design.location && (
+                    <span className="text-[10px] text-slate-400 truncate max-w-[140px]">
+                      {design.location}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
           ))}
         </div>
-
-        {/* Modal Inspector for Full-size Inspection */}
-        {activeModalDesign && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-slate-950/80 backdrop-blur-sm overflow-hidden touch-none overscroll-none select-none transition-opacity duration-150"
-            onClick={() => setActiveModalDesign(null)}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Design Brief Inspector"
-          >
-            <div
-              className="bg-white rounded-2xl max-w-2xl w-full max-h-[84vh] sm:max-h-[88vh] overflow-y-auto shadow-2xl border border-slate-200 p-5 sm:p-8 space-y-6 my-auto relative z-10 touch-auto overscroll-contain animate-in zoom-in-95 duration-150"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Modal Header */}
-              <div className="flex items-start justify-between gap-4 border-b border-slate-100 pb-4">
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#1442CB]">
-                    {activeModalDesign.category}
-                  </span>
-                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mt-1">
-                    {activeModalDesign.client}
-                  </h3>
-                </div>
-                <button
-                  onClick={() => setActiveModalDesign(null)}
-                  className="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg bg-slate-100"
-                  aria-label="Close modal"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Full Poster Presentation Preview */}
-              {activeModalDesign.imagePath ? (
-                <div className="rounded-xl overflow-hidden border border-slate-200 bg-slate-900 shadow-md flex items-center justify-center relative group max-h-[460px]">
-                  <img
-                    src={activeModalDesign.imagePath}
-                    alt={`${activeModalDesign.client} delivered poster design`}
-                    className="w-full max-h-[460px] object-contain object-center"
-                  />
-                  <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500 text-white shadow-sm">
-                    Delivered Client Artwork
-                  </div>
-                </div>
-              ) : (
-                <div
-                  className="p-8 rounded-xl flex flex-col justify-between min-h-[260px] text-white shadow-inner relative overflow-hidden"
-                  style={{ backgroundColor: activeModalDesign.brandColors.primary }}
-                >
-                  <div className="flex justify-between items-center text-xs">
-                    <span className="font-mono text-white/70">PROMOTIONAL SPECIFICATION</span>
-                    <span
-                      className="px-2 py-0.5 rounded text-[11px] font-bold"
-                      style={{
-                        backgroundColor: activeModalDesign.brandColors.accent,
-                        color: activeModalDesign.brandColors.primary,
-                      }}
-                    >
-                      APPROVED ARTWORK
-                    </span>
-                  </div>
-
-                  <div className="my-6">
-                    <h4 className="text-2xl sm:text-3xl font-black leading-tight">
-                      {activeModalDesign.headline}
-                    </h4>
-                    <p className="text-sm text-white/80 mt-2 font-medium">
-                      Typography: {activeModalDesign.typographyStyle}
-                    </p>
-                  </div>
-
-                  <div className="pt-4 border-t border-white/20 flex justify-between text-xs text-white/70">
-                    <span>Aspect: {activeModalDesign.dimensions}</span>
-                    <span className="font-bold text-white">Webspect Brand Engine</span>
-                  </div>
-                </div>
-              )}
-
-              {/* Design Brief Breakdown */}
-              <div className="space-y-4">
-                <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                    Client Design Brief & Context
-                  </h4>
-                  <p className="text-sm text-slate-700 mt-1 leading-relaxed">
-                    {activeModalDesign.briefSummary}
-                  </p>
-                </div>
-
-                <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                    Supplied Deliverables
-                  </h4>
-                  <ul className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {activeModalDesign.deliverables.map((del, i) => (
-                      <li
-                        key={i}
-                        className="text-xs text-slate-700 bg-slate-50 p-2.5 rounded-lg border border-slate-200/70 flex items-center gap-2"
-                      >
-                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                        <span>{del}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              {/* Modal Action Footer */}
-              <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
-                <span className="text-xs text-slate-500">
-                  Ready to upgrade your brand's promotional materials?
-                </span>
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => {
-                      setActiveModalDesign(null);
-                      navigate('/design-packages');
-                    }}
-                    className="px-4 py-2 text-xs font-semibold text-white bg-[#1442CB] hover:bg-[#0F35A8] rounded-xl transition-colors"
-                  >
-                    View Packages ($10–$60)
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
+
+      {/* Render modal directly in document.body via Portal to prevent any stacking issues */}
+      {typeof document !== 'undefined' && modalElement && createPortal(modalElement, document.body)}
     </section>
   );
 };
+

@@ -1,13 +1,11 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 import {
   X,
   ExternalLink,
   CheckCircle2,
   ArrowRight,
-  ShieldCheck,
   MessageCircle,
-  Layers,
-  Building2,
 } from 'lucide-react';
 import { CaseStudy } from '../data/work';
 import { useRouter } from '../context/RouterContext';
@@ -29,7 +27,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
   React.useEffect(() => {
     if (caseStudy) {
       setSelectedImage(caseStudy.imagePath || null);
-      // Scroll resistance: Lock background body scroll so the screen behind modal never jiggles or scrolls
+      // Lock background body scroll so the screen behind modal never jiggles or scrolls
       const originalOverflow = document.body.style.overflow;
       const originalTouchAction = document.body.style.touchAction;
       document.body.style.overflow = 'hidden';
@@ -65,27 +63,30 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
 
   const currentDisplayImg = selectedImage || caseStudy.imagePath;
 
-  return (
+  const modalContent = (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-slate-950/80 backdrop-blur-sm overflow-hidden touch-none overscroll-none select-none transition-opacity duration-150"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-5 bg-slate-950/85 backdrop-blur-md overflow-hidden touch-none overscroll-none select-none transition-opacity duration-150"
       onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${caseStudy.title} details`}
     >
       <div
-        className="bg-white w-full max-w-2xl rounded-2xl shadow-2xl border border-slate-200/90 overflow-hidden flex flex-col max-h-[84vh] sm:max-h-[88vh] my-auto relative z-10 touch-auto overscroll-contain animate-in zoom-in-95 duration-150"
+        className="bg-white w-full max-w-[calc(100vw-1.5rem)] sm:max-w-2xl rounded-2xl shadow-2xl border border-slate-200/90 overflow-hidden flex flex-col max-h-[80dvh] sm:max-h-[85vh] my-auto relative z-10 touch-auto overscroll-contain animate-in zoom-in-95 duration-150"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Modal Top Header (Stiff / Fixed) */}
-        <div className="p-4 sm:p-5 border-b border-slate-200 bg-slate-50/80 shrink-0 flex items-start justify-between gap-3">
-          <div>
-            <div className="flex items-center gap-2 text-xs text-slate-500 font-medium">
-              <span className={caseStudy.projectType === 'Client project' ? 'text-amber-700 font-semibold' : 'text-[#1442CB] font-semibold'}>
+        {/* Modal Top Header (Stiff / Fixed - Never overlaps or pushes off) */}
+        <div className="px-4 py-3 sm:px-5 sm:py-3.5 border-b border-slate-200 bg-slate-50/95 shrink-0 flex items-start justify-between gap-3">
+          <div className="min-w-0 pr-2">
+            <div className="flex items-center gap-2 text-[11px] sm:text-xs text-slate-500 font-medium">
+              <span className={caseStudy.projectType === 'Client project' ? 'text-amber-700 font-bold' : 'text-[#1442CB] font-bold'}>
                 {caseStudy.projectType}
               </span>
-              <span aria-hidden="true">·</span>
-              <span className="text-slate-600 font-medium">{caseStudy.sector}</span>
+              <span aria-hidden="true" className="text-slate-300">·</span>
+              <span className="text-slate-600 truncate font-medium">{caseStudy.sector}</span>
             </div>
 
-            <h2 className="text-lg sm:text-2xl font-extrabold text-slate-900 mt-1 leading-snug">
+            <h2 className="text-base sm:text-xl font-extrabold text-slate-900 mt-0.5 leading-snug line-clamp-2 sm:line-clamp-none">
               {caseStudy.title}
             </h2>
           </div>
@@ -93,7 +94,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200/70 transition-colors cursor-pointer shrink-0"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200/80 transition-colors cursor-pointer shrink-0"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -101,10 +102,10 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
         </div>
 
         {/* Modal Scrollable Body (Internal scroll only) */}
-        <div className="p-4 sm:p-5 overflow-y-auto space-y-5 flex-1 text-slate-800 text-sm overscroll-contain [scrollbar-width:thin]">
+        <div className="p-3.5 sm:p-5 overflow-y-auto min-h-0 flex-1 space-y-4 text-slate-800 text-xs sm:text-sm overscroll-contain [scrollbar-width:thin]">
           {/* Screenshot / Poster Preview (Frameless 16:9 Viewport) */}
           {currentDisplayImg && (
-            <div className="rounded-xl overflow-hidden border border-slate-200 bg-slate-950 relative shadow-sm">
+            <div className="rounded-xl overflow-hidden border border-slate-200 bg-slate-950 relative shadow-xs">
               <div className="w-full aspect-[16/9] overflow-hidden bg-slate-950 relative">
                 <img
                   src={currentDisplayImg}
@@ -123,7 +124,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
                       key={i}
                       type="button"
                       onClick={() => setSelectedImage(img)}
-                      className={`h-9 aspect-[16/9] rounded overflow-hidden shrink-0 border-2 transition-all cursor-pointer ${
+                      className={`h-8 sm:h-9 aspect-[16/9] rounded overflow-hidden shrink-0 border-2 transition-all cursor-pointer ${
                         currentDisplayImg === img
                           ? 'border-[#1442CB] ring-2 ring-blue-400'
                           : 'border-slate-700 opacity-60 hover:opacity-100'
@@ -138,14 +139,14 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
           )}
 
           {/* Summary */}
-          <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
             {caseStudy.summary}
           </p>
 
           {/* Real Challenge & Approach Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-1.5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="p-3 sm:p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block mb-1">
                 The Business Challenge
               </span>
               <p className="text-xs text-slate-700 leading-relaxed">
@@ -153,8 +154,8 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-blue-50/50 border border-blue-100">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#1442CB] block mb-1.5">
+            <div className="p-3 sm:p-3.5 rounded-xl bg-blue-50/50 border border-blue-100">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#1442CB] block mb-1">
                 Webspect Engineering Approach
               </span>
               <p className="text-xs text-slate-700 leading-relaxed">
@@ -165,16 +166,16 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
 
           {/* Delivered Scope */}
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 mb-3">
+            <h3 className="text-[11px] font-bold uppercase tracking-wider text-slate-900 mb-2">
               Delivered Technical Scope
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {caseStudy.delivered.map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-3 bg-white rounded-xl border border-slate-200/80 flex items-start gap-2.5 shadow-2xs"
+                  className="p-2.5 bg-white rounded-lg border border-slate-200/80 flex items-start gap-2 shadow-2xs"
                 >
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
                   <span className="text-xs text-slate-700 leading-snug">{item}</span>
                 </div>
               ))}
@@ -184,7 +185,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
           {/* Tech Stack Unboxed */}
           {caseStudy.techOrTools && caseStudy.techOrTools.length > 0 && (
             <div className="pt-2 border-t border-slate-100">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-2">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block mb-1.5">
                 Technologies & Architecture
               </span>
               <div className="flex flex-wrap items-center gap-1.5 text-xs font-mono text-slate-600">
@@ -199,8 +200,8 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
           )}
         </div>
 
-        {/* Modal Footer Actions (Fixed, Stiff, Clean Mobile & Desktop Fit) */}
-        <div className="p-3 sm:p-4 border-t border-slate-200 bg-slate-50/90 shrink-0">
+        {/* Modal Footer Actions (Fixed, Fluid, Centered without bottom overlapping) */}
+        <div className="p-2.5 sm:p-3.5 border-t border-slate-200 bg-slate-50/95 shrink-0">
           <div className="grid grid-cols-2 sm:flex sm:items-center sm:justify-between gap-2">
             <div className="col-span-2 sm:col-span-1 flex items-center gap-2">
               {caseStudy.externalUrl && (
@@ -252,4 +253,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
       </div>
     </div>
   );
+
+  return typeof document !== 'undefined' ? createPortal(modalContent, document.body) : null;
 };
+

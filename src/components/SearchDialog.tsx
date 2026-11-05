@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { Search, X, ArrowRight, Globe, Layers, Zap, Palette, Boxes, MessageSquare, ExternalLink, FileText, Package } from 'lucide-react';
 import { SOLUTIONS } from '../data/solutions';
 import { PRODUCTS } from '../data/products';
@@ -219,21 +220,21 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({ isOpen, onClose }) =
 
   if (!isOpen) return null;
 
-  return (
+  const dialogElement = (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-slate-950/80 backdrop-blur-sm overflow-hidden touch-none overscroll-none select-none transition-opacity duration-150"
+      className="fixed inset-0 z-[9999] flex items-start justify-center pt-8 sm:pt-20 p-3 sm:p-5 bg-slate-950/85 backdrop-blur-md overflow-hidden touch-none overscroll-none select-none transition-opacity duration-150"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label="Quick Search"
     >
       <div
-        className="w-full max-w-2xl bg-white rounded-xl shadow-2xl border border-slate-200 overflow-hidden text-slate-900 touch-auto overscroll-contain animate-in zoom-in-95 duration-150"
+        className="w-full max-w-[calc(100vw-1.5rem)] sm:max-w-2xl max-h-[80dvh] sm:max-h-[85vh] bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden text-slate-900 touch-auto overscroll-contain animate-in zoom-in-95 duration-150 flex flex-col"
         onClick={(e) => e.stopPropagation()}
         onKeyDown={handleKeyDown}
       >
-        {/* Search Input Bar */}
-        <div className="flex items-center px-4 py-3.5 border-b border-slate-100 gap-3">
+        {/* Search Input Bar (Fixed / Stiff) */}
+        <div className="flex items-center px-4 py-3.5 border-b border-slate-100 gap-3 shrink-0 bg-white">
           <Search className="w-5 h-5 text-slate-400 shrink-0" />
           <input
             ref={inputRef}
@@ -249,7 +250,7 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({ isOpen, onClose }) =
           {query ? (
             <button
               onClick={() => setQuery('')}
-              className="p-1 text-slate-400 hover:text-slate-600 rounded"
+              className="p-1 text-slate-400 hover:text-slate-600 rounded cursor-pointer"
               aria-label="Clear query"
             >
               <X className="w-4 h-4" />
@@ -261,8 +262,8 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({ isOpen, onClose }) =
           )}
         </div>
 
-        {/* Results List */}
-        <div className="max-h-96 overflow-y-auto p-2 divide-y divide-slate-50">
+        {/* Results List (Internal scroll only) */}
+        <div className="flex-1 min-h-0 overflow-y-auto p-2 divide-y divide-slate-50 overscroll-contain [scrollbar-width:thin]">
           {results.length === 0 ? (
             <div className="py-12 text-center text-slate-500">
               <p className="text-sm">No results found for "{query}".</p>
@@ -280,7 +281,7 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({ isOpen, onClose }) =
                   type="button"
                   onClick={() => handleSelect(item.path)}
                   onMouseEnter={() => setSelectedIndex(idx)}
-                  className={`w-full text-left px-3.5 py-2.5 rounded-lg flex items-center justify-between gap-3 transition-colors ${
+                  className={`w-full text-left px-3.5 py-2.5 rounded-lg flex items-center justify-between gap-3 transition-colors cursor-pointer ${
                     isSelected ? 'bg-slate-100 text-slate-900' : 'text-slate-700 hover:bg-slate-50'
                   }`}
                 >
@@ -313,8 +314,8 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({ isOpen, onClose }) =
           )}
         </div>
 
-        {/* Footer shortcuts */}
-        <div className="px-4 py-2.5 bg-slate-50 border-t border-slate-100 text-[11px] text-slate-500 flex items-center justify-between">
+        {/* Footer shortcuts (Fixed / Stiff) */}
+        <div className="px-4 py-2.5 bg-slate-50 border-t border-slate-100 text-[11px] text-slate-500 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-4">
             <span>
               <kbd className="font-mono bg-white border border-slate-200 px-1 py-0.5 rounded shadow-2xs">↑</kbd>{' '}
@@ -324,9 +325,12 @@ export const SearchDialog: React.FC<SearchDialogProps> = ({ isOpen, onClose }) =
               <kbd className="font-mono bg-white border border-slate-200 px-1 py-0.5 rounded shadow-2xs">↵</kbd> to select
             </span>
           </div>
-          <span>Webspect AI & Dev</span>
+          <span className="font-medium text-slate-600">Webspect AI & Dev</span>
         </div>
       </div>
     </div>
   );
+
+  return typeof document !== 'undefined' ? createPortal(dialogElement, document.body) : null;
 };
+
